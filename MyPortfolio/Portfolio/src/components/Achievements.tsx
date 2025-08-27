@@ -15,20 +15,37 @@ interface Achievement {
 const achievements: Achievement[] = [
   {
     id: 1,
-    title: "Certificate of Excellence",
+    title: "Certificate of Excellence in Database",
     description:
       "Won the Inter-Subject Project Competition in the subject of Database at COMSATS University Islamabad, Abbottabad Campus, on 10th January 2025.",
     image: "/imagesAchivemnts/DatabaseUniWinnerProject.jpg",
     category: ["Studies","Projects"]
   },
+  
   {
     id: 2,
-    title: "Campus Honor Roll Award",
+    title: "Campus Honor Roll Award in Fifth Semester",
     description:
       "Recognized in the Campus Honor Roll at COMSATS University Islamabad, Abbottabad Campus, for outstanding academic achievement by securing a perfect SGPA of 4.0/4.0 in the Fifth Semester (Fall 2024 Session).",
     image: "/imagesAchivemnts/5thSemResult.jpg",
     category: ["Studies"],
   },
+  {
+    id: 3,
+    title: "Campus Honor Roll Award in 3rd Semester",
+    description:
+      "Recognized in the Campus Honor Roll at COMSATS University Islamabad, Abbottabad Campus, for outstanding academic achievement by securing a perfect SGPA of 4.0/4.0 in the 3rd Semester (Fall 2023 Session).",
+    image: "/imagesAchivemnts/3rdSem.png",
+    category: ["Studies"],
+  },
+  {
+  "id": 4,
+  "title": "Certificate of Excellence in Computer Network",
+  "description": "Runner up in the Inter-Subject Project Competition in the subject of Computer Network at COMSATS University Islamabad, Abbottabad Campus, on 10th January 2025.",
+  "image": "/imagesAchivemnts/CNProject.jpg",
+  "category": ["Studies","Projects"]
+}
+
 ];
 
 export default function AchievementsSection() {
