@@ -24,14 +24,14 @@ const EducationTimeline: React.FC = () => {
       years: "2018 – 2020",
       degree: "FSc (Pre-Medical)",
       institution: "Model Science College, Muzaffarabad, AJK",
-      grade: "Percentage: 91%",
+      grade: "Percentage: 92%",
     },
     {
       id: 3,
       years: "–2018",
       degree: "Matric (Science)",
       institution: "Haveli Model Science College, Kahuta, AJK",
-      grade: "Percentage: 90%",
+      grade: "Percentage: 91%",
     },
   ];
 
