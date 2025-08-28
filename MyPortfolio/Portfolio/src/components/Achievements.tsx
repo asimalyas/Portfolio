@@ -31,7 +31,15 @@ const achievements: Achievement[] = [
     category: ["Studies"],
   },
   {
-    id: 3,
+  id: 3,
+  title: "Certificate of Appreciation - Communication Event",
+  description:
+    "Awarded a Certificate of Appreciation for organizing at the Communication Event held on 6th December 2022 at COMSATS University Islamabad, Abbottabad Campus.",
+  image: "/imagesAchivemnts/CumunicationEventCertificate.jpg",
+  category: ["Activities"]
+},
+  {
+    id: 4,
     title: "Campus Honor Roll Award in 3rd Semester",
     description:
       "Recognized in the Campus Honor Roll at COMSATS University Islamabad, Abbottabad Campus, for outstanding academic achievement by securing a perfect SGPA of 4.0/4.0 in the 3rd Semester (Fall 2023 Session).",
@@ -39,7 +47,7 @@ const achievements: Achievement[] = [
     category: ["Studies"],
   },
   {
-  "id": 4,
+  "id": 5,
   "title": "Certificate of Excellence in Computer Network",
   "description": "Runner up in the Inter-Subject Project Competition in the subject of Computer Network at COMSATS University Islamabad, Abbottabad Campus, on 10th January 2025.",
   "image": "/imagesAchivemnts/CNProject.jpg",
