@@ -89,7 +89,7 @@ const Index: React.FC = () => {
 
 
             <nav className="hidden md:block">
-              <ul className="flex space-x-8">
+              <ul className="flex space-x-8 over:text-indigo-400 transition-colors">
                 {navLinks.map((link, i) => (
                   <motion.li
                     key={i}
