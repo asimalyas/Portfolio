@@ -10,8 +10,9 @@ interface Project {
   description: string;
   techStack: string[];
   url: string;
-  categories: string[]; // 👈 allow multiple categories
+  categories: string[];
 }
+
 
 const allProjects: Project[] = [
   {
@@ -177,19 +178,33 @@ const allProjects: Project[] = [
   },
 ];
 
-
 const categories = ["All", "Web Development", "Machine Learning", "Game Development", "Data Structures", "Desktop Application"];
 
 const ProjectsSection: React.FC = () => {
   const [activeCategory, setActiveCategory] = useState("All");
   const [searchQuery, setSearchQuery] = useState("");
+  const [visibleCount, setVisibleCount] = useState(6); // 👈 show 6 initially
 
+  // Filtered projects
   const filteredProjects = allProjects.filter((project) => {
     const matchesCategory =
       activeCategory === "All" || project.categories.includes(activeCategory);
-    const matchesSearch = project.title.toLowerCase().includes(searchQuery.toLowerCase());
+    const matchesSearch = project.title
+      .toLowerCase()
+      .includes(searchQuery.toLowerCase());
     return matchesCategory && matchesSearch;
   });
+
+  // Count projects per category
+  const categoryCounts: Record<string, number> = {
+    All: allProjects.length,
+    ...categories.reduce((acc, cat) => {
+      if (cat !== "All") {
+        acc[cat] = allProjects.filter((p) => p.categories.includes(cat)).length;
+      }
+      return acc;
+    }, {} as Record<string, number>),
+  };
 
   const container = {
     hidden: {},
@@ -235,19 +250,25 @@ const ProjectsSection: React.FC = () => {
           </div>
         </motion.div>
 
-        {/* Category Filters */}
+        {/* Category Filters with counts */}
         <div className="flex flex-wrap justify-center gap-4 mb-12">
           {categories.map((cat) => (
             <button
               key={cat}
-              onClick={() => setActiveCategory(cat)}
-              className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${
+              onClick={() => {
+                setActiveCategory(cat);
+                setVisibleCount(6); // reset on filter change
+              }}
+              className={`px-4 py-2 rounded-full text-sm font-medium transition-all flex items-center gap-2 ${
                 activeCategory === cat
                   ? "bg-indigo-500 text-white"
                   : "bg-white/10 text-gray-300 hover:bg-indigo-400 hover:text-white"
               }`}
             >
-              {cat}
+              <span>{cat}</span>
+              <span className="text-xs px-2 py-0.5 rounded-full bg-white/10 text-indigo-200">
+                {categoryCounts[cat] || 0}
+              </span>
             </button>
           ))}
         </div>
@@ -259,7 +280,7 @@ const ProjectsSection: React.FC = () => {
           animate="show"
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
         >
-          {filteredProjects.map((project, i) => (
+          {filteredProjects.slice(0, visibleCount).map((project, i) => (
             <motion.div
               key={project.id}
               variants={cardVariants}
@@ -307,6 +328,20 @@ const ProjectsSection: React.FC = () => {
             </motion.div>
           ))}
         </motion.div>
+
+        {/* Load More Button */}
+        {visibleCount < filteredProjects.length && (
+          <div className="flex justify-center mt-12">
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              onClick={() => setVisibleCount((prev) => prev + 6)}
+              className="px-6 py-3 rounded-full bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 text-white font-medium shadow-lg hover:shadow-indigo-500/30 transition-all"
+            >
+              Load More
+            </motion.button>
+          </div>
+        )}
       </div>
     </section>
   );

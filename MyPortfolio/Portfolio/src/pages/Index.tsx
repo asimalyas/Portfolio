@@ -63,11 +63,15 @@ const Index: React.FC = () => {
           className="fixed w-full top-0 z-50 bg-dark/80 backdrop-blur-md border-b border-white/10"
         >
           <div className="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
-          <motion.h1
+         <motion.h1
   initial={{ x: -50, opacity: 0 }}
   animate={{ x: 0, opacity: 1 }}
   transition={{ duration: 0.8 }}
-  className="flex items-center text-xl font-bold italic relative"
+  className="flex items-center text-xl font-bold relative cursor-pointer hover:text-indigo-400 transition-colors"
+  onClick={() => {
+    const hero = document.getElementById("hero");
+    hero?.scrollIntoView({ behavior: "smooth" });
+  }}
 >
   {/* Profile picture to the left of the text */}
   <motion.img
@@ -79,9 +83,9 @@ const Index: React.FC = () => {
     transition={{ duration: 0.8, ease: "easeOut" }}
     whileHover={{ scale: 1.1, boxShadow: "0 0 10px rgba(165,180,252,0.8)" }}
   />
-
   Mr. Rathore
 </motion.h1>
+
 
 
             <nav className="hidden md:block">
@@ -95,7 +99,7 @@ const Index: React.FC = () => {
                   >
                     <a
                       href={link.href}
-                      className="hover:text-white transition-colors relative group"
+                      className="hover:text-white transition-colors relative group hover:text-indigo-400 transition-colors"
                     >
                       {link.name}
                       <span className="absolute bottom-0 left-0 w-0 h-[2px] bg-white/50 group-hover:w-full transition-all duration-300"></span>
@@ -151,9 +155,9 @@ const Index: React.FC = () => {
         </main>
 
         {/* Footer */}
-        <footer className="py-12 px-4 border-t border-white/10 relative z-10">
-          <div className="max-w-7xl mx-auto text-center">
-            <p className="text-white/60">
+        <footer className="py-12 px-4 border-t border-white/10 relative z-10 hover:text-indigo-400 transition-colors">
+          <div className="max-w-7xl mx-auto text-center hover:text-indigo-400 transition-colors">
+            <p className="text-white/60 hover:text-indigo-400 transition-colors">
               © {new Date().getFullYear()} Mr. Rathore. All rights reserved.
             </p>
           </div>

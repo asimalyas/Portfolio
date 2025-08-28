@@ -1,6 +1,6 @@
 "use client";
 import { useState } from "react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { Card, CardContent } from "@/components/ui/card";
 
 interface Achievement {
@@ -11,7 +11,6 @@ interface Achievement {
   category: ("Studies" | "Projects" | "Activities" | "Sports")[];
   link?: string;
 }
-
 const achievements: Achievement[] = [
   {
     id: 1,
@@ -57,13 +56,29 @@ const achievements: Achievement[] = [
 ];
 
 export default function AchievementsSection() {
-  const [filter, setFilter] = useState<"All" | "Studies" | "Projects" | "Activities" | "Sports">("All");
+  const [filter, setFilter] = useState<
+    "All" | "Studies" | "Projects" | "Activities" | "Sports"
+  >("All");
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
+  const [visibleCount, setVisibleCount] = useState(6);
+
+  const categories: Array<"All" | "Studies" | "Projects" | "Activities" | "Sports"> = ["All", "Studies", "Projects", "Activities", "Sports"];
+
+  const getCount = (
+    cat: "All" | "Studies" | "Projects" | "Activities" | "Sports"
+  ) => {
+    if (cat === "All") return achievements.length;
+    return achievements.filter((ach) =>
+      ach.category.includes(cat as "Studies" | "Projects" | "Activities" | "Sports")
+    ).length;
+  };
 
   const filteredAchievements =
     filter === "All"
       ? achievements
       : achievements.filter((ach) => ach.category.includes(filter));
+
+  const visibleAchievements = filteredAchievements.slice(0, visibleCount);
 
   return (
     <section className="py-20 bg-gradient-to-br from-gray-900 via-black/90 to-gray-950 text-white relative overflow-hidden">
@@ -86,13 +101,16 @@ export default function AchievementsSection() {
           My Achievements
         </motion.h2>
 
-        {/* Filter buttons */}
+        {/* Filter buttons with counts */}
         <div className="flex justify-center gap-4 mb-10 flex-wrap">
-          {["All", "Studies", "Projects", "Activities", "Sports"].map((cat) => (
+          {categories.map((cat) => (
             <motion.button
               key={cat}
-              onClick={() => setFilter(cat as any)}
-              className={`px-6 py-2 rounded-full text-sm font-semibold transition-all duration-300 ${
+              onClick={() => {
+                setFilter(cat as any);
+                setVisibleCount(6); // reset when filter changes
+              }}
+              className={`px-6 py-2 rounded-full text-sm font-semibold transition-all duration-300 flex items-center gap-2 ${
                 filter === cat
                   ? "bg-gradient-to-r from-cyan-500 to-purple-600 text-white shadow-[0_0_15px_cyan] hover:shadow-[0_0_25px_cyan]"
                   : "bg-gray-800 text-gray-300 hover:bg-gray-700/80"
@@ -100,7 +118,10 @@ export default function AchievementsSection() {
               whileTap={{ scale: 0.9 }}
               whileHover={{ scale: 1.05 }}
             >
-              {cat}
+              <span>{cat}</span>
+              <span className="text-xs px-2 py-0.5 rounded-full bg-black/50 border border-cyan-400/40 text-cyan-300 shadow-inner">
+                {getCount(cat)}
+              </span>
             </motion.button>
           ))}
         </div>
@@ -110,73 +131,89 @@ export default function AchievementsSection() {
           layout
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10"
         >
-          {filteredAchievements.map((ach, index) => (
-            <motion.div
-              key={ach.id}
-              initial={{ opacity: 0, y: 90, scale: 0.92 }}
-              whileInView={{ opacity: 1, y: 0, scale: 1 }}
-              transition={{
-                duration: 0.8,
-                delay: index * 0.15,
-                ease: "easeOut",
-              }}
-              viewport={{ once: false, amount: 0.3 }}
-              whileHover={{ scale: 1.06, rotate: 1 }}
-              className="group"
-            >
-              <Card
-                className="overflow-hidden shadow-2xl rounded-2xl bg-gradient-to-br from-gray-900 to-black border border-gray-700 hover:shadow-cyan-500/40 transition-all duration-500"
-                onClick={() => setSelectedImage(ach.image)}
+          <AnimatePresence>
+            {visibleAchievements.map((ach, index) => (
+              <motion.div
+                key={ach.id}
+                initial={{ opacity: 0, y: 90, scale: 0.92 }}
+                whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                transition={{
+                  duration: 0.8,
+                  delay: index * 0.15,
+                  ease: "easeOut",
+                }}
+                viewport={{ once: false, amount: 0.3 }}
+                whileHover={{ scale: 1.06, rotate: 1 }}
+                className="group"
               >
-                <div className="relative w-full h-56 overflow-hidden cursor-pointer">
-                  <motion.img
-                    src={ach.image}
-                    alt={ach.title}
-                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent opacity-70 group-hover:opacity-50 transition-opacity"></div>
-                </div>
+                <Card
+                  className="overflow-hidden shadow-2xl rounded-2xl bg-gradient-to-br from-gray-900 to-black border border-gray-700 hover:shadow-cyan-500/40 transition-all duration-500"
+                  onClick={() => setSelectedImage(ach.image)}
+                >
+                  <div className="relative w-full h-56 overflow-hidden cursor-pointer">
+                    <motion.img
+                      src={ach.image}
+                      alt={ach.title}
+                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent opacity-70 group-hover:opacity-50 transition-opacity"></div>
+                  </div>
 
-                <CardContent className="p-6">
-                  <motion.h3
-                    initial={{ opacity: 0, y: 25 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.7, delay: 0.3 }}
-                    viewport={{ once: false, amount: 0.3 }}
-                    className="text-2xl font-semibold mb-3 group-hover:text-cyan-400 transition-colors"
-                  >
-                    {ach.title}
-                  </motion.h3>
-                  <motion.p
-                    initial={{ opacity: 0 }}
-                    whileInView={{ opacity: 1 }}
-                    transition={{ duration: 0.9, delay: 0.4 }}
-                    viewport={{ once: false, amount: 0.3 }}
-                    className="text-gray-400 text-sm leading-relaxed"
-                  >
-                    {ach.description}
-                  </motion.p>
-
-                  <p className="mt-2 text-xs text-gray-500 italic">
-                    {ach.category.join(", ")}
-                  </p>
-
-                  {ach.link && (
-                    <a
-                      href={ach.link}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-block mt-4 px-4 py-2 text-sm font-semibold bg-gradient-to-r from-purple-500 to-cyan-500 rounded-lg shadow-md hover:scale-105 transform transition"
-                      onClick={(e) => e.stopPropagation()}
+                  <CardContent className="p-6">
+                    <motion.h3
+                      initial={{ opacity: 0, y: 25 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.7, delay: 0.3 }}
+                      viewport={{ once: false, amount: 0.3 }}
+                      className="text-2xl font-semibold mb-3 group-hover:text-cyan-400 transition-colors"
                     >
-                      🔗 View on GitHub
-                    </a>
-                  )}
-                </CardContent>
-              </Card>
-            </motion.div>
-          ))}
+                      {ach.title}
+                    </motion.h3>
+                    <motion.p
+                      initial={{ opacity: 0 }}
+                      whileInView={{ opacity: 1 }}
+                      transition={{ duration: 0.9, delay: 0.4 }}
+                      viewport={{ once: false, amount: 0.3 }}
+                      className="text-gray-400 text-sm leading-relaxed"
+                    >
+                      {ach.description}
+                    </motion.p>
+
+                    <p className="mt-2 text-xs text-gray-500 italic">
+                      {ach.category.join(", ")}
+                    </p>
+
+                    {ach.link && (
+                      <a
+                        href={ach.link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-block mt-4 px-4 py-2 text-sm font-semibold bg-gradient-to-r from-purple-500 to-cyan-500 rounded-lg shadow-md hover:scale-105 transform transition"
+                        onClick={(e) => e.stopPropagation()}
+                      >
+                        🔗 View on GitHub
+                      </a>
+                    )}
+                  </CardContent>
+                </Card>
+              </motion.div>
+            ))}
+          </AnimatePresence>
         </motion.div>
+
+        {/* Load More Button */}
+        {visibleCount < filteredAchievements.length && (
+          <div className="flex justify-center mt-12">
+            <motion.button
+              onClick={() => setVisibleCount((prev) => prev + 6)}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="px-8 py-3 rounded-full font-semibold bg-gradient-to-r from-purple-600 to-cyan-500 text-white shadow-lg hover:shadow-cyan-400/30 transition-all"
+            >
+              Show More
+            </motion.button>
+          </div>
+        )}
       </div>
 
       {/* Image Viewer */}
