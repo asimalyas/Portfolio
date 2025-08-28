@@ -152,9 +152,10 @@ const ContactSection: React.FC = () => {
                 href="tel:+923201587154"
                 className="text-white hover:underline"
               >
-                +92 320 1587154
+                +92 355 6074440
+              
               </a>
-              <span className="block text-gray-400">/ +92 355 6074440</span>
+              <span className="block text-gray-400">/+92 320 1587154 </span>
 
               <p className="text-gray-400 mt-4">📧 Email:</p>
               <a
