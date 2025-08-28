@@ -28,17 +28,22 @@ const ContactSection: React.FC = () => {
 
     emailjs
       .send(
-        "service_xxxxxxx", // 🔑 replace with your EmailJS service ID
-        "template_jw7yt8n", // 🔑 your template ID
-        formData,
-        "user_xxxxxxx" // 🔑 your public key
+        "service_kvvu6el", // ✅ Your Service ID
+        "template_jw7yt8n", // ✅ Your Template ID
+        {
+          from_name: formData.name,
+          from_email: formData.email,
+          message: formData.message,
+        },
+        "lobdwVIuh3vY9JfNr" // ✅ Your Public Key
       )
       .then(() => {
         toast.success("✅ Message sent successfully!");
         setFormData({ name: "", email: "", message: "" });
         setIsSubmitting(false);
       })
-      .catch(() => {
+      .catch((error) => {
+        console.error("EmailJS Error:", error);
         toast.error("❌ Failed to send. Try again later.");
         setIsSubmitting(false);
       });
@@ -56,7 +61,7 @@ const ContactSection: React.FC = () => {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: 0.3 }}
         >
           Let’s Build Something Together 🚀
         </motion.h2>
@@ -68,7 +73,7 @@ const ContactSection: React.FC = () => {
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
+            transition={{ duration: 0.3 }}
             className="space-y-6 bg-gray-900/50 p-8 rounded-2xl border border-gray-700 shadow-xl backdrop-blur-sm"
           >
             <input
@@ -112,7 +117,7 @@ const ContactSection: React.FC = () => {
             initial={{ opacity: 0, x: 30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
+            transition={{ duration: 0.3 }}
             className="bg-gray-900/50 p-10 rounded-2xl border border-gray-700 shadow-xl flex flex-col items-center text-center space-y-6 backdrop-blur-sm"
           >
             <h3 className="text-2xl font-bold mb-4">Connect with Me</h3>
@@ -153,7 +158,6 @@ const ContactSection: React.FC = () => {
                 className="text-white hover:underline"
               >
                 +92 355 6074440
-              
               </a>
               <span className="block text-gray-400">/+92 320 1587154 </span>
 
