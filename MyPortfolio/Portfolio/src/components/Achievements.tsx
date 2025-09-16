@@ -8,7 +8,7 @@ interface Achievement {
   title: string;
   description: string;
   image: string;
-  category: ("Studies" | "Projects" | "Activities" | "Sports")[];
+  category: ("Studies" | "Projects" | "Activities" | "Sports" | "Skills")[];
   link?: string;
 }
 const achievements: Achievement[] = [
@@ -51,8 +51,24 @@ const achievements: Achievement[] = [
   "description": "Runner up in the Inter-Subject Project Competition in the subject of Computer Network at COMSATS University Islamabad, Abbottabad Campus, on 10th January 2025.",
   "image": "/imagesAchivemnts/CNProject.jpg",
   "category": ["Studies","Projects"]
-}
-
+},
+{
+    id: 6,
+    title: "CCNA: Introduction to Networks",
+    description:
+      "Successfully completed the CCNA: Introduction to Networks course offered by COMSATS University Islamabad, Abbottabad Campus through the Cisco Networking Academy program on 14th September 2025.",
+    image: "/imagesAchivemnts/networking.jpg",
+    category: ["Studies","Skills"]
+  }
+  ,
+  {
+    id: 7,
+    title: "Certificate of Appreciation - Convocation 2023",
+    description:
+      "Awarded by COMSATS University Islamabad, Abbottabad Campus for being a part of the Ushers team in the 22nd & 23rd Convocation held in 2023.",
+    image: "/imagesAchivemnts/convocation.jpg",
+    category: ["Activities"]
+  }
 ];
 
 export default function AchievementsSection() {
@@ -62,14 +78,14 @@ export default function AchievementsSection() {
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
   const [visibleCount, setVisibleCount] = useState(6);
 
-  const categories: Array<"All" | "Studies" | "Projects" | "Activities" | "Sports"> = ["All", "Studies", "Projects", "Activities", "Sports"];
+  const categories: Array<"All" | "Studies" | "Projects" | "Activities" | "Sports"| "Skills"> = ["All", "Studies", "Projects", "Activities", "Sports" ,"Skills"];
 
   const getCount = (
-    cat: "All" | "Studies" | "Projects" | "Activities" | "Sports"
+    cat: "All" | "Studies" | "Projects" | "Activities" | "Sports" | "Skills"
   ) => {
     if (cat === "All") return achievements.length;
     return achievements.filter((ach) =>
-      ach.category.includes(cat as "Studies" | "Projects" | "Activities" | "Sports")
+      ach.category.includes(cat as "Studies" | "Projects" | "Activities" | "Sports" | "Skills")
     ).length;
   };
 
