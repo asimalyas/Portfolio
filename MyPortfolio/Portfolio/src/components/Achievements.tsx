@@ -68,7 +68,26 @@ const achievements: Achievement[] = [
       "Awarded by COMSATS University Islamabad, Abbottabad Campus for being a part of the Ushers team in the 22nd & 23rd Convocation held in 2023.",
     image: "/imagesAchivemnts/convocation.jpg",
     category: ["Activities"]
-  }
+  },
+  {
+  id: 8,
+  title: "Demystifying Deep Learning – An Autumn Workshop",
+  description:
+    "Successfully attended the 4-days workshop titled 'Demystifying Deep Learning – An Autumn Workshop' organized by the Department of Electrical Engineering at COMSATS University Islamabad, Abbottabad Campus from 11th to 14th November 2025.",
+  image: "/imagesAchivemnts/DL workshop.jpg",
+  category: ["Studies", "Skills", "Activities"]
+},
+{
+  id: 9,
+  title: "Deep Learning and NLP – Workshop Participation",
+  description:
+    "Successfully participated in the workshop on Deep Learning and Natural Language Processing, organized under the Robotics Club at COMSATS University Islamabad.",
+  image: "/imagesAchivemnts/nlp workshop rebotics clu.png",
+  category: ["Studies", "Skills", "Activities"]
+}
+
+
+  
 ];
 
 export default function AchievementsSection() {
