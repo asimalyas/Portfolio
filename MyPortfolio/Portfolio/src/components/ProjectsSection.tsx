@@ -176,6 +176,23 @@ const allProjects: Project[] = [
     url: "https://github.com/asimalyas/Python-Projects/tree/main",
     categories: ["Machine Learning", "Web Development"],
   },
+  {
+  id: 18,
+  title: "MediConnect – Smart Home-Based Healthcare Management Platform",
+  description: "MediConnect enables patients to receive healthcare services without frequent hospital visits by allowing them to book medical assistants for home checkups and test collection. Uploaded medical data is reviewed remotely by doctors who provide diagnoses and advice, while administrators manage and control doctors, assistants, and system workflows through secure, role-based dashboards.",
+  techStack: [
+    "TypeScript",
+    "React",
+    "Tailwind CSS",
+    "Supabase (Auth, Database, Storage)",
+    "Role-Based Access Control (RBAC)"
+  ],
+  url: "https://github.com/asimalyas/MediConnect",
+  categories: [
+    "Web Development",
+  ]
+}
+
 ];
 
 const categories = ["All", "Web Development", "Machine Learning", "Game Development", "Data Structures", "Desktop Application"];
