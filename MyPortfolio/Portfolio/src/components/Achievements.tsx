@@ -84,7 +84,16 @@ const achievements: Achievement[] = [
     "Successfully participated in the workshop on Deep Learning and Natural Language Processing, organized under the Robotics Club at COMSATS University Islamabad.",
   image: "/imagesAchivemnts/nlp workshop rebotics clu.png",
   category: ["Studies", "Skills", "Activities"]
+},
+{
+  id: 10,
+  title: "Campus Honor Roll – Academic Excellence",
+  description:
+    "Awarded the Campus Honor Roll Certificate for achieving a perfect CGPA of 4.0/4.0 in the Bachelor of Science in Software Engineering (Semester 6) at COMSATS University Islamabad, Abbottabad Campus. The certificate was presented by the Director COMSATS and the Head of the Computer Science Department.",
+  image: "/imagesAchivemnts/semester 6th awarded.png",
+  category: ["Studies"]
 }
+
 
 
   
