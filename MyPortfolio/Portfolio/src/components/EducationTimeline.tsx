@@ -15,23 +15,23 @@ const EducationTimeline: React.FC = () => {
     {
       id: 1,
       years: "2022 – Present",
-      degree: "BS Software Engineering (6th Semester)",
-      institution: "COMSATS University, Abbottabad",
-      grade: "CGPA: 3.88",
+      degree: "BS Software Engineering (8th Semester)",
+      institution: "COMSATS University Islamabad, Abbottabad Campus",
+      grade: "CGPA: 3.90/4.00",
     },
     {
       id: 2,
       years: "2018 – 2020",
       degree: "FSc (Pre-Medical)",
-      institution: "Model Science College, Muzaffarabad, AJK",
-      grade: "Percentage: 92%",
+      institution: "Gov't Model Science College, Muzaffarabad, AJK",
+      grade: "Percentage: 91%",
     },
     {
       id: 3,
       years: "2016–2018",
       degree: "Matric (Science)",
       institution: "Haveli Model Science College, Kahuta, AJK",
-      grade: "Percentage: 91%",
+      grade: "Percentage: 90%",
     },
   ];
 

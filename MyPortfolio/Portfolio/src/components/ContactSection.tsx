@@ -141,7 +141,7 @@ const ContactSection: React.FC = () => {
                 <Twitter className="w-6 h-6" />
               </a>
               <a
-                href="https://linkedin.com/"
+                href=" https://www.linkedin.com/in/muhammad-asim-ilyas-a38b263a2 "
                 target="_blank"
                 rel="noopener noreferrer"
                 className="p-3 border border-gray-600 rounded-full hover:bg-gray-800 transition-transform hover:scale-110"

@@ -112,7 +112,7 @@ const Index: React.FC = () => {
                   transition={{ duration: 0.6, delay: 0.8 }}
                 >
                   <a
-                    href="https://1drv.ms/b/c/cacb8574e4143f96/ETP8JBAou7JLuLKfiEY20yoBQsxFmq4TGrtnV7Qr3ghakw?e=aawGx3"
+                    href="https://1drv.ms/b/c/cacb8574e4143f96/IQDndPwfiBC3T7-h0IuWVWbyAe2Bro3mHw9OHb2SaDe3rz4?e=u6Hdfp"
                     className="cta-button-premium text-sm px-4 py-1"
                   >
                     Resume
