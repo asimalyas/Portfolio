@@ -3,18 +3,18 @@ import { motion, AnimatePresence } from "framer-motion";
 import { ArrowRight, Cpu, Code2, Brain, Database, Rocket, Sparkles } from "lucide-react";
 
 const roles = [
-  "Web Development Wizard",
-  "Machine Learning Innovator",
-  "Game Development Creator",
-  "Data Structures Strategist",
-  "Desktop App Architect",
-  "Deep Learning Explorer",
-  "Problem Solver Extraordinaire",
-  "Innovation Enthusiast",
-  "AI & ML Visionary",
-  "Code Alchemist",
-  "Tech Trailblazer",
-  "Creative Problem Solver"
+  "Web Developer",
+  "Machine Learning Engineer",
+  "Game Developer",
+  "Data Structures & Algorithms Specialist",
+  "Desktop Application Developer",
+  "Deep Learning Engineer",
+  "Problem Solver",
+  "Tech Innovator",
+  "AI & ML Engineer",
+  "Clean Code Developer",
+  "Software Builder",
+  "Creative Thinker"
 ];
 
 const HeroSection: React.FC = () => {
