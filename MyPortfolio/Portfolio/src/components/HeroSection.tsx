@@ -174,11 +174,13 @@ const HeroSection: React.FC = () => {
     
   }}
 >
+<div className="w-70 h-90 md:w-80 md:h-90 overflow-hidden rounded-full border-4 border-indigo-500 shadow-md">
   <img
-    src="/imagesAchivemnts/profilePic.jpg" // your picture
+    src="/imagesAchivemnts/profilePicNew1.png"
     alt="Asim Alyas Rathore"
-    className="w-48 h-48 md:w-64 md:h-64 rounded-full object-cover border-4 border-indigo-500"
+    className="w-full h-full object-cover object-center"
   />
+</div>
 </motion.div>
 
         </div>
