@@ -31,7 +31,7 @@ const EducationTimeline: React.FC = () => {
       years: "2016–2018",
       degree: "Matric (Science)",
       institution: "Haveli Model Science College, Kahuta, AJK",
-      grade: "Percentage: 90%",
+      grade: "Percentage: 90 %",
     },
   ];
 
