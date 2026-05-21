@@ -1,8 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { Github, Twitter, Linkedin } from "lucide-react";
+import { Github, Linkedin, Mail, Phone, MapPin, Send, Loader2 } from "lucide-react";
 import { toast } from "sonner";
 import emailjs from "@emailjs/browser";
+
+const SERVICE_ID = "service_kvvu6el";
+const TEMPLATE_ID = "template_jw7yt8n";
+const PUBLIC_KEY = "lobdwVIuh3vY9JfNr";
 
 const ContactSection: React.FC = () => {
   const [formData, setFormData] = useState({
@@ -10,10 +14,13 @@ const ContactSection: React.FC = () => {
     email: "",
     message: "",
   });
-
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  // Handle input changes
+  // Initialize EmailJS on mount
+  useEffect(() => {
+    emailjs.init(PUBLIC_KEY);
+  }, []);
+
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
@@ -21,95 +28,169 @@ const ContactSection: React.FC = () => {
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  // Submit with EmailJS
+  const validateEmail = (email: string) => {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  };
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+
+    if (!formData.name.trim()) {
+      toast.error("Please enter your name.");
+      return;
+    }
+    if (!validateEmail(formData.email)) {
+      toast.error("Please enter a valid email address.");
+      return;
+    }
+    if (formData.message.trim().length < 10) {
+      toast.error("Message must be at least 10 characters long.");
+      return;
+    }
+
     setIsSubmitting(true);
 
     emailjs
-      .send(
-        "service_kvvu6el", // ✅ Your Service ID
-        "template_jw7yt8n", // ✅ Your Template ID
-        {
-          from_name: formData.name,
-          from_email: formData.email,
-          message: formData.message,
-        },
-        "lobdwVIuh3vY9JfNr" // ✅ Your Public Key
-      )
+      .send(SERVICE_ID, TEMPLATE_ID, {
+        from_name: formData.name,
+        from_email: formData.email.toLowerCase(),
+        message: formData.message,
+      })
       .then(() => {
-        toast.success("✅ Message sent successfully!");
+        toast.success("Message sent successfully! I'll get back to you soon.");
         setFormData({ name: "", email: "", message: "" });
         setIsSubmitting(false);
       })
       .catch((error) => {
         console.error("EmailJS Error:", error);
-        toast.error("❌ Failed to send. Try again later.");
+        // Fallback to mailto
+        const mailtoLink = `mailto:asimalyas44440@gmail.com?subject=Portfolio Contact from ${formData.name}&body=${encodeURIComponent(formData.message)}%0A%0AFrom: ${formData.email}`;
+        toast.error(
+          "Email service is temporarily unavailable. Click below to send via your email app.",
+          {
+            action: {
+              label: "Open Email App",
+              onClick: () => window.open(mailtoLink, "_blank"),
+            },
+            duration: 10000,
+          }
+        );
         setIsSubmitting(false);
       });
   };
 
+  const socialLinks = [
+    {
+      icon: <Github className="w-5 h-5" />,
+      href: "https://github.com/asimalyas",
+      label: "GitHub",
+    },
+    {
+      icon: <Linkedin className="w-5 h-5" />,
+      href: "https://www.linkedin.com/in/muhammad-asim-ilyas-a38b263a2",
+      label: "LinkedIn",
+    },
+  ];
+
   return (
-    <section id="contact" className="py-20 px-4 relative overflow-hidden">
-      {/* Background glow effect */}
-      <div className="absolute -top-40 -right-40 w-[500px] h-[500px] rounded-full bg-blue-500/20 blur-3xl"></div>
-      <div className="absolute -bottom-40 -left-40 w-[500px] h-[500px] rounded-full bg-purple-500/20 blur-3xl"></div>
+    <section id="contact" className="py-24 px-4 relative overflow-hidden">
+      {/* Background glows */}
+      <div className="absolute -top-40 -right-40 w-[500px] h-[500px] rounded-full bg-indigo-500/10 dark:bg-indigo-500/15 blur-[120px]" />
+      <div className="absolute -bottom-40 -left-40 w-[500px] h-[500px] rounded-full bg-purple-500/10 dark:bg-purple-500/15 blur-[120px]" />
 
       <div className="max-w-5xl mx-auto relative z-10">
-        <motion.h2
-          className="text-4xl md:text-5xl font-extrabold text-center mb-16 bg-gradient-to-r from-blue-400 to-purple-500 text-transparent bg-clip-text"
+        <motion.div
+          className="text-center mb-16"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.3 }}
+          transition={{ duration: 0.6 }}
         >
-          Let’s Build Something Together 🚀
-        </motion.h2>
+          <h2 className="text-4xl md:text-5xl font-extrabold mb-4 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 text-transparent bg-clip-text">
+            Let's Connect
+          </h2>
+          <p className="text-muted-foreground text-lg max-w-xl mx-auto">
+            Have a project in mind or just want to say hi? I'd love to hear from you.
+          </p>
+        </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
           {/* Contact Form */}
           <motion.form
             onSubmit={handleSubmit}
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.3 }}
-            className="space-y-6 bg-gray-900/50 p-8 rounded-2xl border border-gray-700 shadow-xl backdrop-blur-sm"
+            transition={{ duration: 0.6 }}
+            className="space-y-5 bg-card p-8 rounded-2xl border border-border shadow-lg"
           >
-            <input
-              type="text"
-              name="name"
-              placeholder="Your Name"
-              value={formData.name}
-              onChange={handleChange}
-              required
-              className="w-full px-4 py-3 rounded-lg bg-gray-800/70 border border-gray-700 text-white focus:ring-2 focus:ring-blue-500 outline-none"
-            />
-            <input
-              type="email"
-              name="email"
-              placeholder="Your Email"
-              value={formData.email}
-              onChange={handleChange}
-              required
-              className="w-full px-4 py-3 rounded-lg bg-gray-800/70 border border-gray-700 text-white focus:ring-2 focus:ring-blue-500 outline-none"
-            />
-            <textarea
-              name="message"
-              placeholder="Your Message"
-              rows={5}
-              value={formData.message}
-              onChange={handleChange}
-              required
-              className="w-full px-4 py-3 rounded-lg bg-gray-800/70 border border-gray-700 text-white focus:ring-2 focus:ring-purple-500 outline-none resize-none"
-            ></textarea>
-            <button
+            <div>
+              <label htmlFor="name" className="block text-sm font-medium text-foreground mb-1.5">
+                Name
+              </label>
+              <input
+                id="name"
+                type="text"
+                name="name"
+                placeholder="Your full name"
+                value={formData.name}
+                onChange={handleChange}
+                required
+                className="w-full px-4 py-3 rounded-xl bg-muted border border-border text-foreground placeholder:text-muted-foreground focus:ring-2 focus:ring-indigo-500/50 focus:border-indigo-500/50 outline-none transition-all"
+              />
+            </div>
+            <div>
+              <label htmlFor="email" className="block text-sm font-medium text-foreground mb-1.5">
+                Email
+              </label>
+              <input
+                id="email"
+                type="email"
+                name="email"
+                placeholder="your@email.com"
+                value={formData.email}
+                onChange={handleChange}
+                required
+                className="w-full px-4 py-3 rounded-xl bg-muted border border-border text-foreground placeholder:text-muted-foreground focus:ring-2 focus:ring-indigo-500/50 focus:border-indigo-500/50 outline-none transition-all"
+              />
+            </div>
+            <div>
+              <label htmlFor="message" className="block text-sm font-medium text-foreground mb-1.5">
+                Message
+              </label>
+              <textarea
+                id="message"
+                name="message"
+                placeholder="Tell me about your project or idea..."
+                rows={5}
+                value={formData.message}
+                onChange={handleChange}
+                required
+                className="w-full px-4 py-3 rounded-xl bg-muted border border-border text-foreground placeholder:text-muted-foreground focus:ring-2 focus:ring-purple-500/50 focus:border-purple-500/50 outline-none resize-none transition-all"
+              />
+              <p className="text-xs text-muted-foreground mt-1 text-right">
+                {formData.message.length}/500
+              </p>
+            </div>
+            <motion.button
               type="submit"
               disabled={isSubmitting}
-              className="w-full py-3 rounded-lg font-semibold text-lg bg-gradient-to-r from-blue-500 to-purple-600 hover:opacity-90 transition-all shadow-lg disabled:opacity-50 disabled:cursor-not-allowed"
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+              className="w-full py-3 rounded-xl font-semibold text-base bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 text-white hover:opacity-90 transition-all shadow-lg shadow-purple-500/20 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
             >
-              {isSubmitting ? "Sending..." : "Send Message ✉️"}
-            </button>
+              {isSubmitting ? (
+                <>
+                  <Loader2 className="w-5 h-5 animate-spin" />
+                  Sending...
+                </>
+              ) : (
+                <>
+                  <Send className="w-5 h-5" />
+                  Send Message
+                </>
+              )}
+            </motion.button>
           </motion.form>
 
           {/* Contact Info Card */}
@@ -117,60 +198,70 @@ const ContactSection: React.FC = () => {
             initial={{ opacity: 0, x: 30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.3 }}
-            className="bg-gray-900/50 p-10 rounded-2xl border border-gray-700 shadow-xl flex flex-col items-center text-center space-y-6 backdrop-blur-sm"
+            transition={{ duration: 0.6 }}
+            className="bg-card p-8 rounded-2xl border border-border shadow-lg flex flex-col justify-between"
           >
-            <h3 className="text-2xl font-bold mb-4">Connect with Me</h3>
+            <div>
+              <h3 className="text-2xl font-bold mb-6 text-foreground">Get in Touch</h3>
 
-            {/* Social Links */}
-            <div className="flex space-x-6">
-              <a
-                href="https://github.com/asimalyas"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="p-3 border border-gray-600 rounded-full hover:bg-gray-800 transition-transform hover:scale-110"
-              >
-                <Github className="w-6 h-6" />
-              </a>
-              <a
-                href="https://twitter.com/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="p-3 border border-gray-600 rounded-full hover:bg-gray-800 transition-transform hover:scale-110"
-              >
-                <Twitter className="w-6 h-6" />
-              </a>
-              <a
-                href=" https://www.linkedin.com/in/muhammad-asim-ilyas-a38b263a2 "
-                target="_blank"
-                rel="noopener noreferrer"
-                className="p-3 border border-gray-600 rounded-full hover:bg-gray-800 transition-transform hover:scale-110"
-              >
-                <Linkedin className="w-6 h-6" />
-              </a>
+              {/* Contact Details */}
+              <div className="space-y-5 mb-8">
+                <div className="flex items-start gap-4">
+                  <div className="w-10 h-10 rounded-xl bg-indigo-500/10 dark:bg-indigo-500/20 flex items-center justify-center flex-shrink-0">
+                    <Phone className="w-5 h-5 text-indigo-500" />
+                  </div>
+                  <div>
+                    <p className="text-sm text-muted-foreground mb-0.5">Phone / WhatsApp</p>
+                    <a href="tel:+923556074440" className="text-foreground hover:text-indigo-500 transition-colors font-medium">
+                      +92 355 6074440
+                    </a>
+                    <span className="block text-sm text-muted-foreground">+92 320 1587154</span>
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-4">
+                  <div className="w-10 h-10 rounded-xl bg-purple-500/10 dark:bg-purple-500/20 flex items-center justify-center flex-shrink-0">
+                    <Mail className="w-5 h-5 text-purple-500" />
+                  </div>
+                  <div>
+                    <p className="text-sm text-muted-foreground mb-0.5">Email</p>
+                    <a href="mailto:asimalyas44440@gmail.com" className="text-foreground hover:text-purple-500 transition-colors font-medium">
+                      asimalyas44440@gmail.com
+                    </a>
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-4">
+                  <div className="w-10 h-10 rounded-xl bg-pink-500/10 dark:bg-pink-500/20 flex items-center justify-center flex-shrink-0">
+                    <MapPin className="w-5 h-5 text-pink-500" />
+                  </div>
+                  <div>
+                    <p className="text-sm text-muted-foreground mb-0.5">Location</p>
+                    <span className="text-foreground font-medium">Abbottabad, Pakistan</span>
+                  </div>
+                </div>
+              </div>
             </div>
 
-            {/* Info */}
-            <div className="space-y-3">
-              <p className="text-gray-400">📞 Phone / WhatsApp:</p>
-              <a
-                href="tel:+923201587154"
-                className="text-white hover:underline"
-              >
-                +92 355 6074440
-              </a>
-              <span className="block text-gray-400">/+92 320 1587154 </span>
-
-              <p className="text-gray-400 mt-4">📧 Email:</p>
-              <a
-                href="mailto:asimalyas44440@gmail.com"
-                className="text-white hover:underline"
-              >
-                asimalyas44440@gmail.com
-              </a>
-
-              <p className="text-gray-400 mt-4">📍 Location:</p>
-              <span className="text-white">Abbottabad, Pakistan</span>
+            {/* Social Links */}
+            <div>
+              <p className="text-sm text-muted-foreground mb-3">Follow me</p>
+              <div className="flex gap-3">
+                {socialLinks.map((social) => (
+                  <motion.a
+                    key={social.label}
+                    href={social.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    whileHover={{ scale: 1.1, y: -2 }}
+                    whileTap={{ scale: 0.95 }}
+                    className="w-11 h-11 rounded-xl border border-border bg-muted/50 flex items-center justify-center text-muted-foreground hover:text-foreground hover:border-primary/50 hover:bg-primary/5 transition-all duration-300"
+                    aria-label={social.label}
+                  >
+                    {social.icon}
+                  </motion.a>
+                ))}
+              </div>
             </div>
           </motion.div>
         </div>

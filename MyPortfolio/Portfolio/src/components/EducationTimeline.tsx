@@ -1,6 +1,6 @@
-"use client";
 import React from "react";
 import { motion } from "framer-motion";
+import { GraduationCap, Calendar, Award } from "lucide-react";
 
 interface Education {
   id: number;
@@ -8,82 +8,111 @@ interface Education {
   degree: string;
   institution: string;
   grade: string;
+  image: string;
 }
 
+const educationData: Education[] = [
+  {
+    id: 1,
+    years: "2022 – Present",
+    degree: "BS Software Engineering (8th Semester)",
+    institution: "COMSATS University Islamabad, Abbottabad Campus",
+    grade: "CGPA: 3.90/4.00",
+    image: "/imagesAchivemnts/comsats.png",
+  },
+  {
+    id: 2,
+    years: "2018 – 2020",
+    degree: "FSc (Pre-Medical)",
+    institution: "Gov't Model Science College, Muzaffarabad, AJK",
+    grade: "Percentage: 91%",
+    image: "/imagesAchivemnts/muzaffarabad.png",
+  },
+  {
+    id: 3,
+    years: "2016 – 2018",
+    degree: "Matric (Science)",
+    institution: "Haveli Model Science College, Kahuta, AJK",
+    grade: "Percentage: 90%",
+    image: "/imagesAchivemnts/kahuta.png",
+  },
+];
+
 const EducationTimeline: React.FC = () => {
-  const educationData: Education[] = [
-    {
-      id: 1,
-      years: "2022 – Present",
-      degree: "BS Software Engineering (8th Semester)",
-      institution: "COMSATS University Islamabad, Abbottabad Campus",
-      grade: "CGPA: 3.90/4.00",
-    },
-    {
-      id: 2,
-      years: "2018 – 2020",
-      degree: "FSc (Pre-Medical)",
-      institution: "Gov't Model Science College, Muzaffarabad, AJK",
-      grade: "Percentage: 91%",
-    },
-    {
-      id: 3,
-      years: "2016–2018",
-      degree: "Matric (Science)",
-      institution: "Haveli Model Science College, Kahuta, AJK",
-      grade: "Percentage: 90 %",
-    },
-  ];
-
   return (
-    <section className="py-24 px-6 relative overflow-hidden">
-      {/* Subtle background glow */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-gradient-to-br from-indigo-500/20 via-purple-500/20 to-pink-500/10 rounded-full blur-2xl opacity-40" />
+    <section className="py-24 px-6 relative overflow-hidden bg-background">
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-gradient-to-br from-indigo-500/8 via-purple-500/5 to-transparent rounded-full blur-[100px]" />
 
-      <div className="max-w-4xl mx-auto relative z-10">
-        {/* Heading */}
-        <motion.h2
-          className="text-4xl md:text-5xl font-extrabold mb-16 text-center bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400 bg-clip-text text-transparent drop-shadow-lg"
+      <div className="max-w-5xl mx-auto relative z-10">
+        <motion.div
+          className="text-center mb-16"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: false, amount: 0.2 }}
-          transition={{ duration: 0.4 }}
+          viewport={{ once: true, amount: 0.2 }}
+          transition={{ duration: 0.5 }}
         >
-          🎓 My Education Journey
-        </motion.h2>
+          <h2 className="text-4xl md:text-5xl font-extrabold mb-4 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 bg-clip-text text-transparent">
+            Education Journey
+          </h2>
+          <p className="text-muted-foreground text-lg max-w-xl mx-auto">
+            My academic path and achievements along the way.
+          </p>
+        </motion.div>
 
-        <div className="relative pl-10">
-          {/* Timeline line */}
-          <div className="absolute left-0 top-0 h-full w-1 bg-gradient-to-b from-indigo-400 via-purple-400 to-pink-400 rounded-full" />
-
+        <div className="space-y-8">
           {educationData.map((item, index) => (
             <motion.div
               key={item.id}
-              className="mb-12 relative group"
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: false, amount: 0.2 }}
-              transition={{ duration: 0.4, delay: index * 0.1 }}
-              whileHover={{ scale: 1.03 }}
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ duration: 0.6, delay: index * 0.15 }}
             >
-              {/* Timeline dot */}
               <motion.div
-                className="absolute -left-[26px] w-5 h-5 rounded-full bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400 border-4 border-white/10 shadow-md"
-                animate={{ scale: [1, 1.2, 1] }}
-                transition={{ repeat: Infinity, duration: 1.5 }}
-              />
+                whileHover={{ y: -4 }}
+                transition={{ type: "spring", stiffness: 300 }}
+                className="group relative overflow-hidden rounded-2xl border border-border bg-card shadow-sm hover:shadow-xl hover:shadow-primary/5 hover:border-primary/30 transition-all duration-500"
+              >
+                <div className="flex flex-col md:flex-row">
+                  {/* Institute Image */}
+                  <div className="relative w-full md:w-72 h-48 md:h-auto overflow-hidden flex-shrink-0">
+                    <img
+                      src={item.image}
+                      alt={item.institution}
+                      loading="lazy"
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-r from-transparent via-transparent to-card/80 hidden md:block" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-card/80 via-transparent to-transparent md:hidden" />
+                    {/* Year badge */}
+                    <div className="absolute top-3 left-3 px-3 py-1.5 rounded-lg bg-gradient-to-r from-indigo-500 to-purple-500 text-white text-xs font-bold shadow-lg flex items-center gap-1.5">
+                      <Calendar className="w-3.5 h-3.5" />
+                      {item.years}
+                    </div>
+                  </div>
 
-              {/* Education Card */}
-              <div className="relative p-6 rounded-2xl border border-white/10 bg-gradient-to-br from-white/10 via-white/5 to-transparent backdrop-blur-xl shadow-lg group-hover:shadow-indigo-500/30 transition-all duration-300">
-                <span className="text-sm text-indigo-300 font-medium block mb-2">
-                  {item.years}
-                </span>
-                <h3 className="text-xl font-bold mb-1 text-white group-hover:text-indigo-200 transition-colors">
-                  {item.degree}
-                </h3>
-                <p className="text-white/80 mb-1">{item.institution}</p>
-                <p className="text-white/60">{item.grade}</p>
-              </div>
+                  {/* Content */}
+                  <div className="flex-1 p-6 md:p-8 flex flex-col justify-center">
+                    <div className="flex items-center gap-2 mb-3">
+                      <div className="w-8 h-8 rounded-lg bg-indigo-500/10 dark:bg-indigo-500/20 flex items-center justify-center">
+                        <GraduationCap className="w-4 h-4 text-indigo-500" />
+                      </div>
+                      <h3 className="text-xl font-bold text-foreground group-hover:text-indigo-500 dark:group-hover:text-indigo-400 transition-colors">
+                        {item.degree}
+                      </h3>
+                    </div>
+
+                    <p className="text-muted-foreground mb-3 text-base">{item.institution}</p>
+
+                    <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-gradient-to-r from-indigo-500/10 to-purple-500/10 border border-indigo-500/20 w-fit">
+                      <Award className="w-4 h-4 text-indigo-500" />
+                      <span className="text-sm font-semibold text-indigo-600 dark:text-indigo-400">
+                        {item.grade}
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
             </motion.div>
           ))}
         </div>
