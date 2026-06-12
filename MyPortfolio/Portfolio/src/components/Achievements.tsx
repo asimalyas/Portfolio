@@ -2,7 +2,7 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Card, CardContent } from "@/components/ui/card";
 import { X } from "lucide-react";
-import { portfolioData, type AchievementCategory } from "@/data/portfolio";
+import { portfolioData, type AchievementCategory } from "../../shared/portfolio.js";
 
 type FilterCat = "All" | AchievementCategory;
 

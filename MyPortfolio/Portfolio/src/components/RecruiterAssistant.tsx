@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { Bot, Loader2, MessageCircle, Send, X } from "lucide-react";
-import { portfolioData } from "@/data/portfolio";
+import { portfolioData } from "../../shared/portfolio.js";
 
 type ChatMessage = {
   role: "assistant" | "user";

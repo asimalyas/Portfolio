@@ -1,13 +1,4 @@
-export type SkillIcon = "monitor" | "gamepad" | "brain" | "database" | "code" | "rocket";
-export type ProjectCategory =
-  | "Web Development"
-  | "Machine Learning"
-  | "Game Development"
-  | "Data Structures"
-  | "Desktop Application";
-export type AchievementCategory = "Studies" | "Projects" | "Activities" | "Sports" | "Skills";
-
-export const portfolioData = {
+﻿export const portfolioData = {
   profile: {
     name: "Asim Alyas Rathore",
     shortName: "Asim Alyas",
@@ -35,37 +26,37 @@ export const portfolioData = {
   },
   skills: [
     {
-      icon: "monitor" as SkillIcon,
+      icon: "monitor",
       color: "text-blue-500",
       title: "Web Development",
       description: "Building responsive and modern websites using React, TypeScript, and integrating backend APIs efficiently.",
     },
     {
-      icon: "gamepad" as SkillIcon,
+      icon: "gamepad",
       color: "text-amber-500",
       title: "Game Development",
       description: "Creating immersive 2D/3D games using Unity & C#, with interactive mechanics and smooth gameplay.",
     },
     {
-      icon: "brain" as SkillIcon,
+      icon: "brain",
       color: "text-purple-500",
       title: "Machine Learning",
       description: "Implementing intelligent systems and predictive models using Python, TensorFlow, and scikit-learn.",
     },
     {
-      icon: "database" as SkillIcon,
+      icon: "database",
       color: "text-emerald-500",
       title: "Database Expertise",
       description: "Hands-on experience in SQL & MS SQL Server for secure, scalable, and efficient data management.",
     },
     {
-      icon: "code" as SkillIcon,
+      icon: "code",
       color: "text-orange-500",
       title: "Data Structures & Algorithms",
       description: "Strong understanding of core DSA concepts for optimized, clean, and efficient solutions.",
     },
     {
-      icon: "rocket" as SkillIcon,
+      icon: "rocket",
       color: "text-rose-500",
       title: "Problem Solving",
       description: "Passionate about tackling challenges with logical thinking and optimized solutions.",
@@ -87,7 +78,7 @@ export const portfolioData = {
         "Built a regression model using Python and Flask to predict house prices in Bangalore. Includes feature engineering, data preprocessing with Pandas, and a web-based interface.",
       techStack: ["Python", "Flask", "Pandas", "JavaScript", "HTML", "CSS"],
       url: "https://github.com/asimalyas/Python-Projects/tree/main/BanglorHousePrizePredictionRegressionModelProject",
-      categories: ["Machine Learning", "Web Development"] as ProjectCategory[],
+      categories: ["Machine Learning", "Web Development"],
     },
     {
       id: 2,
@@ -96,7 +87,7 @@ export const portfolioData = {
         "SVM-based ML model with OpenCV for real-time face recognition. Deployed with Flask, classifies celebrities using wavelet transformations.",
       techStack: ["Python", "OpenCV", "Wavelet", "Flask", "HTML", "CSS"],
       url: "https://github.com/asimalyas/Python-Projects/tree/main/CelebrityFaceRecongization",
-      categories: ["Machine Learning", "Web Development"] as ProjectCategory[],
+      categories: ["Machine Learning", "Web Development"],
     },
     {
       id: 3,
@@ -105,7 +96,7 @@ export const portfolioData = {
         "A Unity-based archery quest game with two levels of increasing difficulty. Implements physics-based arrow shooting, scoring, and immersive gameplay.",
       techStack: ["Unity", "C#"],
       url: "https://github.com/asimalyas/Game-In-Unity-",
-      categories: ["Game Development"] as ProjectCategory[],
+      categories: ["Game Development"],
     },
     {
       id: 4,
@@ -113,7 +104,7 @@ export const portfolioData = {
       description: "An endless runner game built with Unity and C#. Features dynamic obstacles, collision detection, and increasing difficulty.",
       techStack: ["Unity", "C#"],
       url: "https://github.com/asimalyas/Game-In-Unity-",
-      categories: ["Game Development"] as ProjectCategory[],
+      categories: ["Game Development"],
     },
     {
       id: 5,
@@ -121,7 +112,7 @@ export const portfolioData = {
       description: "Web-based system for tracking student attendance. Includes admin and student panels, authentication, and attendance reports.",
       techStack: ["JavaScript", "HTML", "CSS"],
       url: "https://github.com/asimalyas/WebTasks/tree/main/attendance-management-system",
-      categories: ["Web Development"] as ProjectCategory[],
+      categories: ["Web Development"],
     },
     {
       id: 6,
@@ -129,7 +120,7 @@ export const portfolioData = {
       description: "Responsive front-end clone of Amazon's homepage with navbar, product showcases, and grid layouts using pure HTML/CSS.",
       techStack: ["HTML", "CSS"],
       url: "https://github.com/asimalyas/WebTasks/tree/main/Amazon%20clone",
-      categories: ["Web Development"] as ProjectCategory[],
+      categories: ["Web Development"],
     },
     {
       id: 7,
@@ -137,7 +128,7 @@ export const portfolioData = {
       description: "Frontend clone of Netflix's homepage with responsive layouts, hero banner, movie thumbnails, and hover effects.",
       techStack: ["HTML", "CSS"],
       url: "https://github.com/asimalyas/WebTasks/tree/main/Netflix%20frontend",
-      categories: ["Web Development"] as ProjectCategory[],
+      categories: ["Web Development"],
     },
     {
       id: 8,
@@ -145,7 +136,7 @@ export const portfolioData = {
       description: "A React-based platform for practicing and managing programming questions with user-friendly UI for browsing and solving problems.",
       techStack: ["React", "JavaScript"],
       url: "https://github.com/asimalyas/React_projects/tree/main/codecrux",
-      categories: ["Web Development"] as ProjectCategory[],
+      categories: ["Web Development"],
     },
     {
       id: 9,
@@ -153,7 +144,7 @@ export const portfolioData = {
       description: "Java implementation of Huffman Coding for text compression. Demonstrates encoding and decoding algorithms for file compression.",
       techStack: ["Java"],
       url: "https://github.com/asimalyas/DataStructure",
-      categories: ["Data Structures"] as ProjectCategory[],
+      categories: ["Data Structures"],
     },
     {
       id: 10,
@@ -161,7 +152,7 @@ export const portfolioData = {
       description: "React-based stopwatch with Start, Stop, and Reset functionality. Demonstrates React hooks for state and real-time updates.",
       techStack: ["React", "JavaScript"],
       url: "#",
-      categories: ["Web Development"] as ProjectCategory[],
+      categories: ["Web Development"],
     },
     {
       id: 11,
@@ -169,7 +160,7 @@ export const portfolioData = {
       description: "Desktop application built with Java and OOP principles. Supports adding books, tracking issued books, and managing student records.",
       techStack: ["Java", "OOP"],
       url: "https://github.com/asimalyas/OOP",
-      categories: ["Desktop Application"] as ProjectCategory[],
+      categories: ["Desktop Application"],
     },
     {
       id: 12,
@@ -177,7 +168,7 @@ export const portfolioData = {
       description: "Java-based desktop platform for online learning with authentication, course progress tracking, and MS SQL Server backend.",
       techStack: ["Java", "MS SQL Server", "JDBC"],
       url: "#",
-      categories: ["Desktop Application"] as ProjectCategory[],
+      categories: ["Desktop Application"],
     },
     {
       id: 13,
@@ -185,7 +176,7 @@ export const portfolioData = {
       description: "React application for managing personal notes. Users can add, delete, and organize notes with a responsive interface.",
       techStack: ["React", "JavaScript"],
       url: "https://github.com/asimalyas/React_projects/tree/main/noter-keeper",
-      categories: ["Web Development"] as ProjectCategory[],
+      categories: ["Web Development"],
     },
     {
       id: 14,
@@ -193,7 +184,7 @@ export const portfolioData = {
       description: "Real-time currency converter with API integration. Fetches live exchange rates with a clean, responsive UI.",
       techStack: ["JavaScript", "HTML", "CSS"],
       url: "https://github.com/asimalyas/WebTasks/tree/main/currencyChanger",
-      categories: ["Web Development"] as ProjectCategory[],
+      categories: ["Web Development"],
     },
     {
       id: 15,
@@ -201,7 +192,7 @@ export const portfolioData = {
       description: "Full-stack project using React and Node.js to generate QR codes dynamically. Users can input text/links and download QR codes.",
       techStack: ["Node.js", "React"],
       url: "https://github.com/asimalyas/React_projects/tree/main/QR%2BCode%2BProject",
-      categories: ["Web Development"] as ProjectCategory[],
+      categories: ["Web Development"],
     },
     {
       id: 16,
@@ -209,7 +200,7 @@ export const portfolioData = {
       description: "Extended Rock-Paper-Scissors with an additional 'Fire' element. Features interactive gameplay and custom rules.",
       techStack: ["JavaScript", "HTML", "CSS"],
       url: "https://github.com/asimalyas/WebTasks/tree/main/RockSesiorFire",
-      categories: ["Web Development"] as ProjectCategory[],
+      categories: ["Web Development"],
     },
     {
       id: 17,
@@ -217,7 +208,7 @@ export const portfolioData = {
       description: "Modern frontend travel website with elegant layouts, responsive design, and sections for destinations and services.",
       techStack: ["React", "HTML", "CSS", "JavaScript"],
       url: "https://github.com/asimalyas/React_projects/tree/main/hepta",
-      categories: ["Web Development"] as ProjectCategory[],
+      categories: ["Web Development"],
     },
     {
       id: 18,
@@ -225,7 +216,7 @@ export const portfolioData = {
       description: "Random Forest classification model for predicting heart disease using tabular data with data cleaning and feature engineering.",
       techStack: ["Python", "Flask", "HTML", "CSS", "JavaScript", "RandomForest"],
       url: "https://github.com/asimalyas/Python-Projects/tree/main",
-      categories: ["Machine Learning", "Web Development"] as ProjectCategory[],
+      categories: ["Machine Learning", "Web Development"],
     },
     {
       id: 19,
@@ -233,7 +224,7 @@ export const portfolioData = {
       description: "Enables patients to book medical assistants for home checkups. Doctors review data remotely with role-based dashboards.",
       techStack: ["TypeScript", "React", "Tailwind CSS", "Supabase", "RBAC"],
       url: "https://github.com/asimalyas/MediConnect",
-      categories: ["Web Development"] as ProjectCategory[],
+      categories: ["Web Development"],
     },
   ],
   education: [
@@ -269,70 +260,70 @@ export const portfolioData = {
       title: "Certificate of Excellence in Database",
       description: "Won the Inter-Subject Project Competition in Database at COMSATS University, January 2025.",
       image: "/imagesAchivemnts/DatabaseUniWinnerProject.jpg",
-      category: ["Studies", "Projects"] as AchievementCategory[],
+      category: ["Studies", "Projects"],
     },
     {
       id: 2,
       title: "Campus Honor Roll - 5th Semester",
       description: "Perfect SGPA of 4.0/4.0 in Fall 2024 at COMSATS University Islamabad.",
       image: "/imagesAchivemnts/5thSemResult.jpg",
-      category: ["Studies"] as AchievementCategory[],
+      category: ["Studies"],
     },
     {
       id: 3,
       title: "Communication Event Certificate",
       description: "Awarded for organizing the Communication Event, December 2022.",
       image: "/imagesAchivemnts/CumunicationEventCertificate.jpg",
-      category: ["Activities"] as AchievementCategory[],
+      category: ["Activities"],
     },
     {
       id: 4,
       title: "Campus Honor Roll - 3rd Semester",
       description: "Perfect SGPA of 4.0/4.0 in Fall 2023 Session.",
       image: "/imagesAchivemnts/3rdSem.png",
-      category: ["Studies"] as AchievementCategory[],
+      category: ["Studies"],
     },
     {
       id: 5,
       title: "Excellence in Computer Network",
       description: "Runner up in Inter-Subject Project Competition, January 2025.",
       image: "/imagesAchivemnts/CNProject.jpg",
-      category: ["Studies", "Projects"] as AchievementCategory[],
+      category: ["Studies", "Projects"],
     },
     {
       id: 6,
       title: "CCNA: Introduction to Networks",
       description: "Completed through Cisco Networking Academy, September 2025.",
       image: "/imagesAchivemnts/networking.jpg",
-      category: ["Studies", "Skills"] as AchievementCategory[],
+      category: ["Studies", "Skills"],
     },
     {
       id: 7,
       title: "Convocation 2023 Appreciation",
       description: "Ushers team in the 22nd & 23rd Convocation.",
       image: "/imagesAchivemnts/convocation.jpg",
-      category: ["Activities"] as AchievementCategory[],
+      category: ["Activities"],
     },
     {
       id: 8,
       title: "Deep Learning Workshop",
       description: "4-day workshop by Dept. of Electrical Engineering, November 2025.",
       image: "/imagesAchivemnts/DL workshop.jpg",
-      category: ["Studies", "Skills", "Activities"] as AchievementCategory[],
+      category: ["Studies", "Skills", "Activities"],
     },
     {
       id: 9,
       title: "Deep Learning & NLP Workshop",
       description: "Robotics Club workshop on DL and NLP at COMSATS.",
       image: "/imagesAchivemnts/nlp workshop rebotics clu.png",
-      category: ["Studies", "Skills", "Activities"] as AchievementCategory[],
+      category: ["Studies", "Skills", "Activities"],
     },
     {
       id: 10,
       title: "Campus Honor Roll - 6th Semester",
       description: "Perfect CGPA 4.0/4.0 in BS Software Engineering Semester 6.",
       image: "/imagesAchivemnts/semester 6th awarded.png",
-      category: ["Studies"] as AchievementCategory[],
+      category: ["Studies"],
     },
   ],
   experience: {
@@ -358,6 +349,4 @@ export const portfolioData = {
     "Summarize Asim for a junior software engineer role.",
     "What machine learning projects has Asim built?",
   ],
-} as const;
-
-export type PortfolioData = typeof portfolioData;
+};

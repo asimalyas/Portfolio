@@ -1,4 +1,4 @@
-import { portfolioData } from "../src/data/portfolio.js";
+import { portfolioData } from "../shared/portfolio.js";
 
 type VercelRequest = {
   method?: string;

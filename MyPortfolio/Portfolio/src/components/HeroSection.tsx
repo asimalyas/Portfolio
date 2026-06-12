@@ -1,7 +1,7 @@
 import React from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowRight, Cpu, Code2, Brain, Database, Rocket, Sparkles } from "lucide-react";
-import { portfolioData } from "@/data/portfolio";
+import { portfolioData } from "../../shared/portfolio.js";
 
 const roles = portfolioData.profile.roles;
 

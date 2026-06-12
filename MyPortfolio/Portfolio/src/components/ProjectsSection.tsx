@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Search, ExternalLink } from "lucide-react";
 import GlowCard from "./GlowCard";
-import { portfolioData, type ProjectCategory } from "@/data/portfolio";
+import { portfolioData, type ProjectCategory } from "../../shared/portfolio.js";
 
 type FilterCategory = "All" | ProjectCategory;
 

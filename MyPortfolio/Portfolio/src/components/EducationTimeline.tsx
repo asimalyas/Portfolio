@@ -1,7 +1,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { GraduationCap, Calendar, Award } from "lucide-react";
-import { portfolioData } from "@/data/portfolio";
+import { portfolioData } from "../../shared/portfolio.js";
 
 const educationData = portfolioData.education;
 

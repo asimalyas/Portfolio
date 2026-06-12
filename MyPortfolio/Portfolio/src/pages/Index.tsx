@@ -11,7 +11,7 @@ import Achievements from '@/components/Achievements';
 import ThemeToggle from '@/components/ThemeToggle';
 import ScrollToTop from '@/components/ScrollToTop';
 import ParticleBackground from '@/components/ParticleBackground';
-import { portfolioData } from '@/data/portfolio';
+import { portfolioData } from '../../shared/portfolio.js';
 import RecruiterAssistant from '@/components/RecruiterAssistant';
 
 const navLinks = [

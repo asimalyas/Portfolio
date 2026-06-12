@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import { Github, Linkedin, Mail, Phone, MapPin, Send, Loader2 } from "lucide-react";
 import { toast } from "sonner";
 import emailjs from "@emailjs/browser";
-import { portfolioData } from "@/data/portfolio";
+import { portfolioData } from "../../shared/portfolio.js";
 
 const SERVICE_ID = "service_kvvu6el";
 const TEMPLATE_ID = "template_jw7yt8n";

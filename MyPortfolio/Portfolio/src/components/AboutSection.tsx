@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { Card, CardContent } from "@/components/ui/card";
 import { Code, Database, Brain, Rocket, Gamepad, Monitor } from "lucide-react";
-import { portfolioData, type SkillIcon } from "@/data/portfolio";
+import { portfolioData, type SkillIcon } from "../../shared/portfolio.js";
 
 const skills = portfolioData.skills;
 const skillIcons: Record<SkillIcon, JSX.Element> = {
