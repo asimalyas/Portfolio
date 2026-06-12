@@ -225,7 +225,16 @@
       techStack: ["TypeScript", "React", "Tailwind CSS", "Supabase", "RBAC"],
       url: "https://github.com/asimalyas/MediConnect",
       categories: ["Web Development"],
-    },
+    },{
+id: 2,
+title: "Entry Test Quiz — Timed MCQ Practice App",
+description:
+"Built a responsive timed MCQ quiz app with customizable timers, automatic answer saving, refresh recovery, detailed results, retry mode, and optional explanations.",
+techStack: ["React", "TypeScript", "Vite", "JavaScript", "HTML", "CSS", "localStorage"],
+url: "https://github.com/asimalyas/Quiz_test_app",
+categories: ["Web Development"],
+},
+
   ],
   education: [
     {
