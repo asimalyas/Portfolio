@@ -10,3 +10,5 @@ build/
 # Logs and local environment
 *.log
 *.local
+
+.vercel

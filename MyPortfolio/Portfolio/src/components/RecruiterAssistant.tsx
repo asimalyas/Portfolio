@@ -12,6 +12,7 @@ const MAX_QUESTION_CHARS = 300;
 
 const welcomeMessage =
   "Hi, I'm Asim's AI recruiter assistant. Ask me about his skills, projects, education, achievements, or contact details.";
+const unavailableMessage = "The AI assistant is temporarily unavailable. Please try again shortly.";
 
 function renderInlineMarkdown(text: string) {
   return text.split(/(\*\*[^*]+\*\*)/g).map((part, index) => {
@@ -118,21 +119,30 @@ export default function RecruiterAssistant() {
         body: JSON.stringify({ question: nextQuestion }),
       });
 
-      const data = (await response.json()) as { answer?: string; error?: string };
+      let data: { answer?: string; error?: string } = {};
+      const contentType = response.headers.get("content-type") || "";
+
+      if (contentType.includes("application/json")) {
+        try {
+          data = (await response.json()) as { answer?: string; error?: string };
+        } catch {
+          data = {};
+        }
+      }
 
       if (!response.ok) {
-        throw new Error(data.error || "The assistant is temporarily unavailable.");
+        throw new Error(unavailableMessage);
       }
 
       setMessages((prev) => [
         ...prev,
         {
           role: "assistant",
-          text: data.answer || "Information is unavailable in the current portfolio data.",
+          text: data.answer || unavailableMessage,
         },
       ]);
     } catch (err) {
-      const message = err instanceof Error ? err.message : "The assistant is temporarily unavailable.";
+      const message = err instanceof Error ? err.message : unavailableMessage;
       setError(message);
       setMessages((prev) => [
         ...prev,
