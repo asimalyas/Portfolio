@@ -107,6 +107,23 @@
       categories: ["Game Development"],
     },
     {
+id: 3,
+title: "Personal Developer Portfolio with AI Integration",
+description:
+"Built a responsive developer portfolio to showcase my projects, skills, achievements, and experience, with an integrated AI-powered assistant for interactive project exploration.",
+techStack: ["React", "TypeScript", "Vite", "CSS", "AI Integration", "Vercel"],
+url: "https://github.com/asimalyas/Portfolio",
+categories: ["Web Development", "Machine Learning"],
+},
+ {
+      id: 19,
+      title: "MediConnect - Smart Healthcare Platform",
+      description: "Enables patients to book medical assistants for home checkups. Doctors review data remotely with role-based dashboards.",
+      techStack: ["TypeScript", "React", "Tailwind CSS", "Supabase", "RBAC"],
+      url: "https://github.com/asimalyas/MediConnect",
+      categories: ["Web Development"],
+    },
+    {
       id: 5,
       title: "Attendance Management System",
       description: "Web-based system for tracking student attendance. Includes admin and student panels, authentication, and attendance reports.",
@@ -114,23 +131,7 @@
       url: "https://github.com/asimalyas/WebTasks/tree/main/attendance-management-system",
       categories: ["Web Development"],
     },
-    {
-      id: 6,
-      title: "Amazon Home Page Clone",
-      description: "Responsive front-end clone of Amazon's homepage with navbar, product showcases, and grid layouts using pure HTML/CSS.",
-      techStack: ["HTML", "CSS"],
-      url: "https://github.com/asimalyas/WebTasks/tree/main/Amazon%20clone",
-      categories: ["Web Development"],
-    },
-    {
-      id: 7,
-      title: "Netflix Home Page Clone",
-      description: "Frontend clone of Netflix's homepage with responsive layouts, hero banner, movie thumbnails, and hover effects.",
-      techStack: ["HTML", "CSS"],
-      url: "https://github.com/asimalyas/WebTasks/tree/main/Netflix%20frontend",
-      categories: ["Web Development"],
-    },
-    {
+        {
       id: 8,
       title: "CodeCrux",
       description: "A React-based platform for practicing and managing programming questions with user-friendly UI for browsing and solving problems.",
@@ -170,6 +171,23 @@
       url: "#",
       categories: ["Desktop Application"],
     },
+    {
+      id: 6,
+      title: "Amazon Home Page Clone",
+      description: "Responsive front-end clone of Amazon's homepage with navbar, product showcases, and grid layouts using pure HTML/CSS.",
+      techStack: ["HTML", "CSS"],
+      url: "https://github.com/asimalyas/WebTasks/tree/main/Amazon%20clone",
+      categories: ["Web Development"],
+    },
+    {
+      id: 7,
+      title: "Netflix Home Page Clone",
+      description: "Frontend clone of Netflix's homepage with responsive layouts, hero banner, movie thumbnails, and hover effects.",
+      techStack: ["HTML", "CSS"],
+      url: "https://github.com/asimalyas/WebTasks/tree/main/Netflix%20frontend",
+      categories: ["Web Development"],
+    },
+
     {
       id: 13,
       title: "Note Keeper",
@@ -218,22 +236,7 @@
       url: "https://github.com/asimalyas/Python-Projects/tree/main",
       categories: ["Machine Learning", "Web Development"],
     },
-    {
-      id: 19,
-      title: "MediConnect - Smart Healthcare Platform",
-      description: "Enables patients to book medical assistants for home checkups. Doctors review data remotely with role-based dashboards.",
-      techStack: ["TypeScript", "React", "Tailwind CSS", "Supabase", "RBAC"],
-      url: "https://github.com/asimalyas/MediConnect",
-      categories: ["Web Development"],
-    },{
-id: 2,
-title: "Entry Test Quiz — Timed MCQ Practice App",
-description:
-"Built a responsive timed MCQ quiz app with customizable timers, automatic answer saving, refresh recovery, detailed results, retry mode, and optional explanations.",
-techStack: ["React", "TypeScript", "Vite", "JavaScript", "HTML", "CSS", "localStorage"],
-url: "https://github.com/asimalyas/Quiz_test_app",
-categories: ["Web Development"],
-},
+   
 
   ],
   education: [
