@@ -1,85 +1,44 @@
-# Modern Portfolio Template 🚀
+# Asim Alyas Rathore Portfolio
 
-A sleek, modern portfolio template built with React, Vite, and Framer Motion. This template features a stunning black and white design with smooth animations and a polished user interface.
+A modern personal portfolio for Asim Alyas Rathore, built with React, Vite, TypeScript, Tailwind CSS, Framer Motion, and shadcn-style UI components.
 
-## ✨ Features
+## What It Includes
 
-- 🎨 Minimalist black and white design
-- ⚡ Built with React + Vite for lightning-fast performance
-- 🎭 Smooth animations powered by Framer Motion
-- 📱 Fully responsive design
-- 🌙 Dark mode optimized
-- 🎯 SEO friendly
-- 🚀 Modern development practices
-- 📝 Blog section included
-- 💼 Project showcase
-- 📬 Contact form
-- 🔍 Easy to customize
+- Responsive single-page portfolio layout
+- Hero, skills, project showcase, education, achievements, and contact sections
+- Dark and light theme support
+- Animated project cards, achievement gallery, tech marquee, and particle background
+- EmailJS-powered contact form with mail app fallback
+- React Router fallback page for unknown routes
 
-## 🛠️ Tech Stack
+## Tech Stack
 
-- React
+- React 18
 - Vite
 - TypeScript
 - Tailwind CSS
 - Framer Motion
-- Lucide Icons
+- Lucide React
+- Sonner
+- EmailJS
 
-## 🚀 Getting Started
+## Project Structure
 
-1. Clone the repository:
-```bash
-git clone https://github.com/Resorcinolworks/PortfolioTemplate.git
-```
+- `src/pages/Index.tsx` - Main portfolio page and section layout
+- `src/components/` - Portfolio sections and shared UI behavior
+- `src/components/ui/` - shadcn-style reusable UI components
+- `src/index.css` - Tailwind setup, theme tokens, and global styles
+- `public/imagesAchivemnts/` - Portfolio images, certificates, and profile assets
 
-2. Install dependencies:
-```bash
-cd PortfolioTemplate
-npm install
-```
+## Scripts
 
-3. Start the development server:
 ```bash
 npm run dev
-```
-
-4. Build for production:
-```bash
 npm run build
+npm run lint
+npm run preview
 ```
 
-## 🎨 Customization
+## Notes
 
-1. Update personal information in the configuration files
-2. Modify the color scheme in `tailwind.config.js`
-3. Add your projects in the projects section
-4. Customize animations in the components
-5. Add your blog posts in the blog section
-
-## 🤝 Contributing
-
-Contributions are welcome! Feel free to open an issue or submit a pull request.
-
-1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
-
-## 📝 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## 🙏 Acknowledgments
-
-- [React](https://reactjs.org/)
-- [Vite](https://vitejs.dev/)
-- [Framer Motion](https://www.framer.com/motion/)
-- [Tailwind CSS](https://tailwindcss.com/)
-- [Lucide Icons](https://lucide.dev/)
-
----
-
-Made with ❤️ by [Ayush Raghuvanshi](https://github.com/Resorcinolworks)
-
-Feel free to star ⭐ this repository if you find it useful!
+The production portfolio is a static Vite build. Contact form delivery depends on the configured EmailJS service and template.

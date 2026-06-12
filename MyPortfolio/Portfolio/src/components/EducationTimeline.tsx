@@ -1,42 +1,9 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { GraduationCap, Calendar, Award } from "lucide-react";
+import { portfolioData } from "@/data/portfolio";
 
-interface Education {
-  id: number;
-  years: string;
-  degree: string;
-  institution: string;
-  grade: string;
-  image: string;
-}
-
-const educationData: Education[] = [
-  {
-    id: 1,
-    years: "2022 – Present",
-    degree: "BS Software Engineering (8th Semester)",
-    institution: "COMSATS University Islamabad, Abbottabad Campus",
-    grade: "CGPA: 3.90/4.00",
-    image: "/imagesAchivemnts/comsats.png",
-  },
-  {
-    id: 2,
-    years: "2018 – 2020",
-    degree: "FSc (Pre-Medical)",
-    institution: "Gov't Model Science College, Muzaffarabad, AJK",
-    grade: "Percentage: 91%",
-    image: "/imagesAchivemnts/muzaffarabad.png",
-  },
-  {
-    id: 3,
-    years: "2016 – 2018",
-    degree: "Matric (Science)",
-    institution: "Haveli Model Science College, Kahuta, AJK",
-    grade: "Percentage: 90%",
-    image: "/imagesAchivemnts/kahuta.png",
-  },
-];
+const educationData = portfolioData.education;
 
 const EducationTimeline: React.FC = () => {
   return (
@@ -74,7 +41,6 @@ const EducationTimeline: React.FC = () => {
                 className="group relative overflow-hidden rounded-2xl border border-border bg-card shadow-sm hover:shadow-xl hover:shadow-primary/5 hover:border-primary/30 transition-all duration-500"
               >
                 <div className="flex flex-col md:flex-row">
-                  {/* Institute Image */}
                   <div className="relative w-full md:w-72 h-48 md:h-auto overflow-hidden flex-shrink-0">
                     <img
                       src={item.image}
@@ -84,14 +50,12 @@ const EducationTimeline: React.FC = () => {
                     />
                     <div className="absolute inset-0 bg-gradient-to-r from-transparent via-transparent to-card/80 hidden md:block" />
                     <div className="absolute inset-0 bg-gradient-to-t from-card/80 via-transparent to-transparent md:hidden" />
-                    {/* Year badge */}
                     <div className="absolute top-3 left-3 px-3 py-1.5 rounded-lg bg-gradient-to-r from-indigo-500 to-purple-500 text-white text-xs font-bold shadow-lg flex items-center gap-1.5">
                       <Calendar className="w-3.5 h-3.5" />
                       {item.years}
                     </div>
                   </div>
 
-                  {/* Content */}
                   <div className="flex-1 p-6 md:p-8 flex flex-col justify-center">
                     <div className="flex items-center gap-2 mb-3">
                       <div className="w-8 h-8 rounded-lg bg-indigo-500/10 dark:bg-indigo-500/20 flex items-center justify-center">

@@ -1,45 +1,17 @@
 import { motion } from "framer-motion";
 import { Card, CardContent } from "@/components/ui/card";
 import { Code, Database, Brain, Rocket, Gamepad, Monitor } from "lucide-react";
+import { portfolioData, type SkillIcon } from "@/data/portfolio";
 
-const skills = [
-  {
-    icon: <Monitor className="w-9 h-9" />,
-    color: "text-blue-500",
-    title: "Web Development",
-    desc: "Building responsive and modern websites using React, TypeScript, and integrating backend APIs efficiently.",
-  },
-  {
-    icon: <Gamepad className="w-9 h-9" />,
-    color: "text-amber-500",
-    title: "Game Development",
-    desc: "Creating immersive 2D/3D games using Unity & C#, with interactive mechanics and smooth gameplay.",
-  },
-  {
-    icon: <Brain className="w-9 h-9" />,
-    color: "text-purple-500",
-    title: "Machine Learning",
-    desc: "Implementing intelligent systems and predictive models using Python, TensorFlow, and scikit-learn.",
-  },
-  {
-    icon: <Database className="w-9 h-9" />,
-    color: "text-emerald-500",
-    title: "Database Expertise",
-    desc: "Hands-on experience in SQL & MS SQL Server for secure, scalable, and efficient data management.",
-  },
-  {
-    icon: <Code className="w-9 h-9" />,
-    color: "text-orange-500",
-    title: "Data Structures & Algorithms",
-    desc: "Strong understanding of core DSA concepts for optimized, clean, and efficient solutions.",
-  },
-  {
-    icon: <Rocket className="w-9 h-9" />,
-    color: "text-rose-500",
-    title: "Problem Solving",
-    desc: "Passionate about tackling challenges with logical thinking and optimized solutions.",
-  },
-];
+const skills = portfolioData.skills;
+const skillIcons: Record<SkillIcon, JSX.Element> = {
+  monitor: <Monitor className="w-9 h-9" />,
+  gamepad: <Gamepad className="w-9 h-9" />,
+  brain: <Brain className="w-9 h-9" />,
+  database: <Database className="w-9 h-9" />,
+  code: <Code className="w-9 h-9" />,
+  rocket: <Rocket className="w-9 h-9" />,
+};
 
 const containerVariants = {
   hidden: {},
@@ -72,8 +44,7 @@ export default function AboutSection() {
             About <span className="bg-gradient-to-r from-indigo-500 to-purple-500 bg-clip-text text-transparent">Me</span>
           </h2>
           <p className="text-muted-foreground max-w-2xl mx-auto text-lg leading-relaxed">
-            I'm a passionate Software Engineering student at COMSATS University with expertise
-            in full-stack development, machine learning, and building scalable applications.
+            {portfolioData.profile.about}
           </p>
         </motion.div>
 
@@ -93,10 +64,10 @@ export default function AboutSection() {
 
                 <CardContent className="relative p-6 flex flex-col items-center text-center z-10">
                   <div className={`mb-4 ${skill.color} transform group-hover:scale-110 transition-transform duration-300`}>
-                    {skill.icon}
+                    {skillIcons[skill.icon]}
                   </div>
                   <h3 className="text-lg font-semibold mb-2 text-foreground">{skill.title}</h3>
-                  <p className="text-muted-foreground text-sm leading-relaxed">{skill.desc}</p>
+                  <p className="text-muted-foreground text-sm leading-relaxed">{skill.description}</p>
                 </CardContent>
               </Card>
             </motion.div>

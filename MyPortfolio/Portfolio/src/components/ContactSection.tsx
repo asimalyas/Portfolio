@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { Github, Linkedin, Mail, Phone, MapPin, Send, Loader2 } from "lucide-react";
 import { toast } from "sonner";
 import emailjs from "@emailjs/browser";
+import { portfolioData } from "@/data/portfolio";
 
 const SERVICE_ID = "service_kvvu6el";
 const TEMPLATE_ID = "template_jw7yt8n";
@@ -64,7 +65,9 @@ const ContactSection: React.FC = () => {
       .catch((error) => {
         console.error("EmailJS Error:", error);
         // Fallback to mailto
-        const mailtoLink = `mailto:asimalyas44440@gmail.com?subject=Portfolio Contact from ${formData.name}&body=${encodeURIComponent(formData.message)}%0A%0AFrom: ${formData.email}`;
+        const subject = encodeURIComponent(`Portfolio Contact from ${formData.name}`);
+        const body = encodeURIComponent(`${formData.message}\n\nFrom: ${formData.email}`);
+        const mailtoLink = `mailto:${encodeURIComponent(portfolioData.contact.email)}?subject=${subject}&body=${body}`;
         toast.error(
           "Email service is temporarily unavailable. Click below to send via your email app.",
           {
@@ -82,12 +85,12 @@ const ContactSection: React.FC = () => {
   const socialLinks = [
     {
       icon: <Github className="w-5 h-5" />,
-      href: "https://github.com/asimalyas",
+      href: portfolioData.links.github,
       label: "GitHub",
     },
     {
       icon: <Linkedin className="w-5 h-5" />,
-      href: "https://www.linkedin.com/in/muhammad-asim-ilyas-a38b263a2",
+      href: portfolioData.links.linkedin,
       label: "LinkedIn",
     },
   ];
@@ -163,6 +166,7 @@ const ContactSection: React.FC = () => {
                 name="message"
                 placeholder="Tell me about your project or idea..."
                 rows={5}
+                maxLength={500}
                 value={formData.message}
                 onChange={handleChange}
                 required
@@ -212,10 +216,10 @@ const ContactSection: React.FC = () => {
                   </div>
                   <div>
                     <p className="text-sm text-muted-foreground mb-0.5">Phone / WhatsApp</p>
-                    <a href="tel:+923556074440" className="text-foreground hover:text-indigo-500 transition-colors font-medium">
-                      +92 355 6074440
+                    <a href={`tel:${portfolioData.contact.phones[0].replace(/\s/g, "")}`} className="text-foreground hover:text-indigo-500 transition-colors font-medium">
+                      {portfolioData.contact.phones[0]}
                     </a>
-                    <span className="block text-sm text-muted-foreground">+92 320 1587154</span>
+                    <span className="block text-sm text-muted-foreground">{portfolioData.contact.phones[1]}</span>
                   </div>
                 </div>
 
@@ -225,8 +229,8 @@ const ContactSection: React.FC = () => {
                   </div>
                   <div>
                     <p className="text-sm text-muted-foreground mb-0.5">Email</p>
-                    <a href="mailto:asimalyas44440@gmail.com" className="text-foreground hover:text-purple-500 transition-colors font-medium">
-                      asimalyas44440@gmail.com
+                    <a href={`mailto:${portfolioData.contact.email}`} className="text-foreground hover:text-purple-500 transition-colors font-medium">
+                      {portfolioData.contact.email}
                     </a>
                   </div>
                 </div>
@@ -237,7 +241,7 @@ const ContactSection: React.FC = () => {
                   </div>
                   <div>
                     <p className="text-sm text-muted-foreground mb-0.5">Location</p>
-                    <span className="text-foreground font-medium">Abbottabad, Pakistan</span>
+                    <span className="text-foreground font-medium">{portfolioData.contact.location}</span>
                   </div>
                 </div>
               </div>

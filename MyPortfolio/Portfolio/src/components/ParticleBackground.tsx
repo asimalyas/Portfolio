@@ -19,7 +19,7 @@ const ParticleBackground: React.FC = () => {
     if (!ctx) return;
 
     let animId: number;
-    let particles: Particle[] = [];
+    const particles: Particle[] = [];
     const PARTICLE_COUNT = 60;
     const CONNECTION_DIST = 120;
     const MOUSE = { x: -1000, y: -1000 };

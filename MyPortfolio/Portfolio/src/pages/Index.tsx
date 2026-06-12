@@ -11,6 +11,8 @@ import Achievements from '@/components/Achievements';
 import ThemeToggle from '@/components/ThemeToggle';
 import ScrollToTop from '@/components/ScrollToTop';
 import ParticleBackground from '@/components/ParticleBackground';
+import { portfolioData } from '@/data/portfolio';
+import RecruiterAssistant from '@/components/RecruiterAssistant';
 
 const navLinks = [
   { name: 'About', href: '#aboutus' },
@@ -57,13 +59,13 @@ const Index: React.FC = () => {
               }}
             >
               <motion.img
-                src="/imagesAchivemnts/profilePic.jpg"
-                alt="Asim Alyas Rathore"
+                src={portfolioData.profile.logoAvatar}
+                alt={portfolioData.profile.name}
                 className="w-9 h-9 rounded-full border-2 border-indigo-500 shadow-md object-cover"
                 whileHover={{ scale: 1.1 }}
               />
               <span className="bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 bg-clip-text text-transparent group-hover:opacity-80 transition-opacity">
-                Mr. Rathore
+                {portfolioData.profile.brandName}
               </span>
             </motion.a>
 
@@ -83,7 +85,7 @@ const Index: React.FC = () => {
                 </motion.a>
               ))}
               <motion.a
-                href="https://1drv.ms/b/c/cacb8574e4143f96/IQDndPwfiBC3T7-h0IuWVWbyAe2Bro3mHw9OHb2SaDe3rz4?e=u6Hdfp"
+                href={portfolioData.links.resume}
                 target="_blank"
                 rel="noopener noreferrer"
                 initial={{ y: -10, opacity: 0 }}
@@ -142,7 +144,7 @@ const Index: React.FC = () => {
                     </motion.a>
                   ))}
                   <a
-                    href="https://1drv.ms/b/c/cacb8574e4143f96/IQDndPwfiBC3T7-h0IuWVWbyAe2Bro3mHw9OHb2SaDe3rz4?e=u6Hdfp"
+                    href={portfolioData.links.resume}
                     target="_blank"
                     rel="noopener noreferrer"
                     onClick={closeMobile}
@@ -193,12 +195,12 @@ const Index: React.FC = () => {
             <div className="flex flex-col md:flex-row justify-between items-center gap-6">
               <div className="flex items-center gap-3">
                 <img
-                  src="/imagesAchivemnts/profilePic.jpg"
-                  alt="Asim Alyas Rathore"
+                  src={portfolioData.profile.logoAvatar}
+                  alt={portfolioData.profile.name}
                   className="w-8 h-8 rounded-full border-2 border-indigo-500 object-cover"
                 />
                 <span className="font-semibold text-sm bg-gradient-to-r from-indigo-500 to-purple-500 bg-clip-text text-transparent">
-                  Mr. Rathore
+                  {portfolioData.profile.brandName}
                 </span>
               </div>
 
@@ -215,7 +217,7 @@ const Index: React.FC = () => {
               </nav>
 
               <p className="text-sm text-muted-foreground">
-                © {new Date().getFullYear()} Asim Alyas Rathore
+                © {new Date().getFullYear()} {portfolioData.profile.name}
               </p>
             </div>
           </div>
@@ -223,6 +225,7 @@ const Index: React.FC = () => {
 
         {/* Scroll to top */}
         <ScrollToTop />
+        <RecruiterAssistant />
       </motion.div>
     </AnimatePresence>
   );

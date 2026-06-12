@@ -1,19 +1,9 @@
 import React from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowRight, Cpu, Code2, Brain, Database, Rocket, Sparkles } from "lucide-react";
+import { portfolioData } from "@/data/portfolio";
 
-const roles = [
-  "Software Engineer",
-  "Web Developer",
-  "Machine Learning Engineer",
-  "Game Developer",
-  "DSA Specialist",
-  "Deep Learning Engineer",
-  "Problem Solver",
-  "AI & ML Engineer",
-  "Clean Code Developer",
-  "Creative Thinker",
-];
+const roles = portfolioData.profile.roles;
 
 const HeroSection: React.FC = () => {
   const [roleIndex, setRoleIndex] = React.useState(0);
@@ -135,8 +125,7 @@ const HeroSection: React.FC = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.4, duration: 0.8, ease: "easeOut" }}
             >
-              I create modern, scalable, and intelligent digital products — blending sleek frontend
-              design, powerful APIs, and advanced machine learning.
+              {portfolioData.profile.summary}
             </motion.p>
 
             {/* CTA buttons */}
@@ -183,8 +172,8 @@ const HeroSection: React.FC = () => {
               <div className="absolute inset-0 rounded-full bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 blur-xl opacity-30 scale-110" />
               <div className="relative w-56 h-56 sm:w-64 sm:h-64 md:w-72 md:h-72 lg:w-80 lg:h-80 overflow-hidden rounded-full border-4 border-indigo-500/50 shadow-2xl">
                 <img
-                  src="/imagesAchivemnts/profilePicNew1.png"
-                  alt="Asim Alyas Rathore — Software Engineer"
+                  src={portfolioData.profile.avatar}
+                  alt={`${portfolioData.profile.name} - Software Engineer`}
                   className="w-full h-full object-cover object-top"
                   loading="eager"
                 />

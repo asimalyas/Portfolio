@@ -2,30 +2,12 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Card, CardContent } from "@/components/ui/card";
 import { X } from "lucide-react";
+import { portfolioData, type AchievementCategory } from "@/data/portfolio";
 
-interface Achievement {
-  id: number;
-  title: string;
-  description: string;
-  image: string;
-  category: ("Studies" | "Projects" | "Activities" | "Sports" | "Skills")[];
-}
+type FilterCat = "All" | AchievementCategory;
 
-const achievements: Achievement[] = [
-  { id: 1, title: "Certificate of Excellence in Database", description: "Won the Inter-Subject Project Competition in Database at COMSATS University, January 2025.", image: "/imagesAchivemnts/DatabaseUniWinnerProject.jpg", category: ["Studies", "Projects"] },
-  { id: 2, title: "Campus Honor Roll — 5th Semester", description: "Perfect SGPA of 4.0/4.0 in Fall 2024 at COMSATS University Islamabad.", image: "/imagesAchivemnts/5thSemResult.jpg", category: ["Studies"] },
-  { id: 3, title: "Communication Event Certificate", description: "Awarded for organizing the Communication Event, December 2022.", image: "/imagesAchivemnts/CumunicationEventCertificate.jpg", category: ["Activities"] },
-  { id: 4, title: "Campus Honor Roll — 3rd Semester", description: "Perfect SGPA of 4.0/4.0 in Fall 2023 Session.", image: "/imagesAchivemnts/3rdSem.png", category: ["Studies"] },
-  { id: 5, title: "Excellence in Computer Network", description: "Runner up in Inter-Subject Project Competition, January 2025.", image: "/imagesAchivemnts/CNProject.jpg", category: ["Studies", "Projects"] },
-  { id: 6, title: "CCNA: Introduction to Networks", description: "Completed through Cisco Networking Academy, September 2025.", image: "/imagesAchivemnts/networking.jpg", category: ["Studies", "Skills"] },
-  { id: 7, title: "Convocation 2023 Appreciation", description: "Ushers team in the 22nd & 23rd Convocation.", image: "/imagesAchivemnts/convocation.jpg", category: ["Activities"] },
-  { id: 8, title: "Deep Learning Workshop", description: "4-day workshop by Dept. of Electrical Engineering, November 2025.", image: "/imagesAchivemnts/DL workshop.jpg", category: ["Studies", "Skills", "Activities"] },
-  { id: 9, title: "Deep Learning & NLP Workshop", description: "Robotics Club workshop on DL and NLP at COMSATS.", image: "/imagesAchivemnts/nlp workshop rebotics clu.png", category: ["Studies", "Skills", "Activities"] },
-  { id: 10, title: "Campus Honor Roll — 6th Semester", description: "Perfect CGPA 4.0/4.0 in BS Software Engineering Semester 6.", image: "/imagesAchivemnts/semester 6th awarded.png", category: ["Studies"] },
-];
-
-type FilterCat = "All" | "Studies" | "Projects" | "Activities" | "Sports" | "Skills";
-const categories: FilterCat[] = ["All", "Studies", "Projects", "Activities", "Sports", "Skills"];
+const achievements = portfolioData.achievements;
+const categories = portfolioData.achievementCategories as readonly FilterCat[];
 
 export default function AchievementsSection() {
   const [filter, setFilter] = useState<FilterCat>("All");
@@ -34,10 +16,10 @@ export default function AchievementsSection() {
 
   const getCount = (cat: FilterCat) => {
     if (cat === "All") return achievements.length;
-    return achievements.filter((a) => a.category.includes(cat as any)).length;
+    return achievements.filter((a) => a.category.includes(cat)).length;
   };
 
-  const filtered = filter === "All" ? achievements : achievements.filter((a) => a.category.includes(filter as any));
+  const filtered = filter === "All" ? achievements : achievements.filter((a) => a.category.includes(filter));
   const visible = filtered.slice(0, visibleCount);
 
   return (

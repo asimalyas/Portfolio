@@ -1,202 +1,16 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowRight, Search, ExternalLink } from "lucide-react";
+import { Search, ExternalLink } from "lucide-react";
 import GlowCard from "./GlowCard";
+import { portfolioData, type ProjectCategory } from "@/data/portfolio";
 
-interface Project {
-  id: number;
-  title: string;
-  description: string;
-  techStack: string[];
-  url: string;
-  categories: string[];
-}
+type FilterCategory = "All" | ProjectCategory;
 
-const allProjects: Project[] = [
-  {
-    id: 1,
-    title: "Bangalore House Prediction (Regression Model)",
-    description:
-      "Built a regression model using Python and Flask to predict house prices in Bangalore. Includes feature engineering, data preprocessing with Pandas, and a web-based interface.",
-    techStack: ["Python", "Flask", "Pandas", "JavaScript", "HTML", "CSS"],
-    url: "https://github.com/asimalyas/Python-Projects/tree/main/BanglorHousePrizePredictionRegressionModelProject",
-    categories: ["Machine Learning", "Web Development"],
-  },
-  {
-    id: 2,
-    title: "Celebrity Recognition (Classification Model)",
-    description:
-      "SVM-based ML model with OpenCV for real-time face recognition. Deployed with Flask, classifies celebrities using wavelet transformations.",
-    techStack: ["Python", "OpenCV", "Wavelet", "Flask", "HTML", "CSS"],
-    url: "https://github.com/asimalyas/Python-Projects/tree/main/CelebrityFaceRecongization",
-    categories: ["Machine Learning", "Web Development"],
-  },
-  {
-    id: 3,
-    title: "Archery Quest Game",
-    description:
-      "A Unity-based archery quest game with two levels of increasing difficulty. Implements physics-based arrow shooting, scoring, and immersive gameplay.",
-    techStack: ["Unity", "C#"],
-    url: "https://github.com/asimalyas/Game-In-Unity-",
-    categories: ["Game Development"],
-  },
-  {
-    id: 4,
-    title: "Runner Game",
-    description:
-      "An endless runner game built with Unity and C#. Features dynamic obstacles, collision detection, and increasing difficulty.",
-    techStack: ["Unity", "C#"],
-    url: "https://github.com/asimalyas/Game-In-Unity-",
-    categories: ["Game Development"],
-  },
-  {
-    id: 5,
-    title: "Attendance Management System",
-    description:
-      "Web-based system for tracking student attendance. Includes admin and student panels, authentication, and attendance reports.",
-    techStack: ["JavaScript", "HTML", "CSS"],
-    url: "https://github.com/asimalyas/WebTasks/tree/main/attendance-management-system",
-    categories: ["Web Development"],
-  },
-  {
-    id: 6,
-    title: "Amazon Home Page Clone",
-    description:
-      "Responsive front-end clone of Amazon's homepage with navbar, product showcases, and grid layouts using pure HTML/CSS.",
-    techStack: ["HTML", "CSS"],
-    url: "https://github.com/asimalyas/WebTasks/tree/main/Amazon%20clone",
-    categories: ["Web Development"],
-  },
-  {
-    id: 7,
-    title: "Netflix Home Page Clone",
-    description:
-      "Frontend clone of Netflix's homepage with responsive layouts, hero banner, movie thumbnails, and hover effects.",
-    techStack: ["HTML", "CSS"],
-    url: "https://github.com/asimalyas/WebTasks/tree/main/Netflix%20frontend",
-    categories: ["Web Development"],
-  },
-  {
-    id: 8,
-    title: "CodeCrux",
-    description:
-      "A React-based platform for practicing and managing programming questions with user-friendly UI for browsing and solving problems.",
-    techStack: ["React", "JavaScript"],
-    url: "https://github.com/asimalyas/React_projects/tree/main/codecrux",
-    categories: ["Web Development"],
-  },
-  {
-    id: 9,
-    title: "Huffman Coding",
-    description:
-      "Java implementation of Huffman Coding for text compression. Demonstrates encoding and decoding algorithms for file compression.",
-    techStack: ["Java"],
-    url: "https://github.com/asimalyas/DataStructure",
-    categories: ["Data Structures"],
-  },
-  {
-    id: 10,
-    title: "Stop Watch",
-    description:
-      "React-based stopwatch with Start, Stop, and Reset functionality. Demonstrates React hooks for state and real-time updates.",
-    techStack: ["React", "JavaScript"],
-    url: "#",
-    categories: ["Web Development"],
-  },
-  {
-    id: 11,
-    title: "Library Management System",
-    description:
-      "Desktop application built with Java and OOP principles. Supports adding books, tracking issued books, and managing student records.",
-    techStack: ["Java", "OOP"],
-    url: "https://github.com/asimalyas/OOP",
-    categories: ["Desktop Application"],
-  },
-  {
-    id: 12,
-    title: "E-Learning Course Platform",
-    description:
-      "Java-based desktop platform for online learning with authentication, course progress tracking, and MS SQL Server backend.",
-    techStack: ["Java", "MS SQL Server", "JDBC"],
-    url: "#",
-    categories: ["Desktop Application"],
-  },
-  {
-    id: 13,
-    title: "Note Keeper",
-    description:
-      "React application for managing personal notes. Users can add, delete, and organize notes with a responsive interface.",
-    techStack: ["React", "JavaScript"],
-    url: "https://github.com/asimalyas/React_projects/tree/main/noter-keeper",
-    categories: ["Web Development"],
-  },
-  {
-    id: 14,
-    title: "Currency Converter",
-    description:
-      "Real-time currency converter with API integration. Fetches live exchange rates with a clean, responsive UI.",
-    techStack: ["JavaScript", "HTML", "CSS"],
-    url: "https://github.com/asimalyas/WebTasks/tree/main/currencyChanger",
-    categories: ["Web Development"],
-  },
-  {
-    id: 15,
-    title: "QR Image Generator",
-    description:
-      "Full-stack project using React and Node.js to generate QR codes dynamically. Users can input text/links and download QR codes.",
-    techStack: ["Node.js", "React"],
-    url: "https://github.com/asimalyas/React_projects/tree/main/QR%2BCode%2BProject",
-    categories: ["Web Development"],
-  },
-  {
-    id: 16,
-    title: "Rock, Paper, Scissors, Fire Game",
-    description:
-      "Extended Rock-Paper-Scissors with an additional 'Fire' element. Features interactive gameplay and custom rules.",
-    techStack: ["JavaScript", "HTML", "CSS"],
-    url: "https://github.com/asimalyas/WebTasks/tree/main/RockSesiorFire",
-    categories: ["Web Development"],
-  },
-  {
-    id: 17,
-    title: "Hepta",
-    description:
-      "Modern frontend travel website with elegant layouts, responsive design, and sections for destinations and services.",
-    techStack: ["React", "HTML", "CSS", "JavaScript"],
-    url: "https://github.com/asimalyas/React_projects/tree/main/hepta",
-    categories: ["Web Development"],
-  },
-  {
-    id: 18,
-    title: "Heart Disease Prediction (Classification)",
-    description:
-      "Random Forest classification model for predicting heart disease using tabular data with data cleaning and feature engineering.",
-    techStack: ["Python", "Flask", "HTML", "CSS", "JavaScript", "RandomForest"],
-    url: "https://github.com/asimalyas/Python-Projects/tree/main",
-    categories: ["Machine Learning", "Web Development"],
-  },
-  {
-    id: 19,
-    title: "MediConnect – Smart Healthcare Platform",
-    description:
-      "Enables patients to book medical assistants for home checkups. Doctors review data remotely with role-based dashboards.",
-    techStack: ["TypeScript", "React", "Tailwind CSS", "Supabase", "RBAC"],
-    url: "https://github.com/asimalyas/MediConnect",
-    categories: ["Web Development"],
-  },
-];
-
-const categories = [
-  "All",
-  "Web Development",
-  "Machine Learning",
-  "Game Development",
-  "Data Structures",
-  "Desktop Application",
-];
+const allProjects = portfolioData.projects;
+const categories = portfolioData.projectCategories as readonly FilterCategory[];
 
 const ProjectsSection: React.FC = () => {
-  const [activeCategory, setActiveCategory] = useState("All");
+  const [activeCategory, setActiveCategory] = useState<FilterCategory>("All");
   const [searchQuery, setSearchQuery] = useState("");
   const [visibleCount, setVisibleCount] = useState(6);
 
@@ -209,14 +23,13 @@ const ProjectsSection: React.FC = () => {
     return matchesCategory && matchesSearch;
   });
 
-  const categoryCounts: Record<string, number> = {
+  const categoryCounts: Record<FilterCategory, number> = {
     All: allProjects.length,
-    ...categories.reduce((acc, cat) => {
-      if (cat !== "All") {
-        acc[cat] = allProjects.filter((p) => p.categories.includes(cat)).length;
-      }
-      return acc;
-    }, {} as Record<string, number>),
+    "Web Development": allProjects.filter((p) => p.categories.includes("Web Development")).length,
+    "Machine Learning": allProjects.filter((p) => p.categories.includes("Machine Learning")).length,
+    "Game Development": allProjects.filter((p) => p.categories.includes("Game Development")).length,
+    "Data Structures": allProjects.filter((p) => p.categories.includes("Data Structures")).length,
+    "Desktop Application": allProjects.filter((p) => p.categories.includes("Desktop Application")).length,
   };
 
   const container = {
@@ -249,7 +62,6 @@ const ProjectsSection: React.FC = () => {
           </p>
         </motion.div>
 
-        {/* Search Bar */}
         <motion.div
           initial={{ opacity: 0, y: -10 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -269,7 +81,6 @@ const ProjectsSection: React.FC = () => {
           </div>
         </motion.div>
 
-        {/* Category Filters */}
         <div className="flex flex-wrap justify-center gap-3 mb-12">
           {categories.map((cat) => (
             <motion.button
@@ -300,7 +111,6 @@ const ProjectsSection: React.FC = () => {
           ))}
         </div>
 
-        {/* Project Cards */}
         <motion.div
           key={`${activeCategory}-${searchQuery}`}
           variants={container}
@@ -330,9 +140,9 @@ const ProjectsSection: React.FC = () => {
                       {project.description}
                     </p>
                     <div className="flex flex-wrap gap-1.5 mb-4">
-                      {project.techStack.map((tech, idx) => (
+                      {project.techStack.map((tech) => (
                         <span
-                          key={idx}
+                          key={tech}
                           className="text-xs px-2.5 py-1 rounded-lg border border-border bg-muted/50 text-muted-foreground group-hover:border-indigo-500/30 group-hover:text-foreground transition-colors"
                         >
                           {tech}
@@ -356,14 +166,12 @@ const ProjectsSection: React.FC = () => {
           </AnimatePresence>
         </motion.div>
 
-        {/* No results */}
         {filteredProjects.length === 0 && (
           <div className="text-center py-16">
             <p className="text-muted-foreground text-lg">No projects found matching your search.</p>
           </div>
         )}
 
-        {/* Load More */}
         {visibleCount < filteredProjects.length && (
           <div className="flex justify-center mt-12">
             <motion.button
