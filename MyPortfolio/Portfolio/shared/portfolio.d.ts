@@ -32,7 +32,7 @@ export type PortfolioData = {
     title: string;
     description: string;
     techStack: string[];
-    url: string;
+    url: string | null;
     categories: ProjectCategory[];
   }>;
   education: Array<{
@@ -53,7 +53,24 @@ export type PortfolioData = {
   }>;
   experience: {
     summary: string;
-    professionalRoles: string[];
+    availability: string;
+    placeholderTitle: string;
+    placeholderDescription: string;
+    roles: Array<{
+      title: string;
+      company: string;
+      type: "Internship" | "Job" | "Freelance" | "Contract" | "Volunteer";
+      location: string;
+      period: string;
+      image?: string;
+      description: string;
+      responsibilities: string[];
+      technologies: string[];
+      certificateUrl?: string;
+      companyUrl?: string;
+    }>;
+    focusAreas: string[];
+    futureEntryFields: string[];
     note: string;
   };
   links: {

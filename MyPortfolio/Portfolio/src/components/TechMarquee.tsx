@@ -33,7 +33,7 @@ export default function TechMarquee({ items = DEFAULT_ITEMS, speed = 40, classNa
         <div className="marquee__inner marquee--ltr">
           {duplicated.map((tech, idx) => (
             <div key={`top-${tech.name}-${idx}`} className="marquee__item" title={tech.name}>
-              <span className="marquee__icon">{tech.icon ? React.cloneElement(tech.icon, { className: "w-5 h-5" }) : "•"}</span>
+              <span className="marquee__icon">{tech.icon ? React.cloneElement(tech.icon, { className: "w-5 h-5" }) : "*"}</span>
               <span className="marquee__name">{tech.name}</span>
             </div>
           ))}
@@ -44,7 +44,7 @@ export default function TechMarquee({ items = DEFAULT_ITEMS, speed = 40, classNa
         <div className="marquee__inner marquee--rtl">
           {duplicated.map((tech, idx) => (
             <div key={`btm-${tech.name}-${idx}`} className="marquee__item" title={tech.name}>
-              <span className="marquee__icon">{tech.icon ? React.cloneElement(tech.icon, { className: "w-5 h-5" }) : "•"}</span>
+              <span className="marquee__icon">{tech.icon ? React.cloneElement(tech.icon, { className: "w-5 h-5" }) : "*"}</span>
               <span className="marquee__name">{tech.name}</span>
             </div>
           ))}

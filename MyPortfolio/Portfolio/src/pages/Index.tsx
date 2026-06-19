@@ -8,6 +8,7 @@ import EducationTimeline from '@/components/EducationTimeline';
 import ContactSection from '@/components/ContactSection';
 import AboutSection from '@/components/AboutSection';
 import Achievements from '@/components/Achievements';
+import ExperienceSection from '@/components/ExperienceSection';
 import ThemeToggle from '@/components/ThemeToggle';
 import ScrollToTop from '@/components/ScrollToTop';
 import ParticleBackground from '@/components/ParticleBackground';
@@ -17,6 +18,7 @@ import RecruiterAssistant from '@/components/RecruiterAssistant';
 const navLinks = [
   { name: 'About', href: '#aboutus' },
   { name: 'Projects', href: '#projects' },
+  { name: 'Experience', href: '#experience' },
   { name: 'Education', href: '#education' },
   { name: 'Achievements', href: '#achievements' },
   { name: 'Contact', href: '#contact' },
@@ -38,7 +40,7 @@ const Index: React.FC = () => {
         {/* Particle network background */}
         <ParticleBackground />
 
-        {/* ═══════════ HEADER ═══════════ */}
+        {/* Header */}
         <motion.header
           initial={{ y: -50, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
@@ -61,7 +63,7 @@ const Index: React.FC = () => {
               <motion.img
                 src={portfolioData.profile.logoAvatar}
                 alt={portfolioData.profile.name}
-                className="w-9 h-9 rounded-full border-2 border-indigo-500 shadow-md object-cover"
+                className="h-10 w-10 rounded-full border-2 border-indigo-500 bg-white object-cover object-top shadow-md"
                 whileHover={{ scale: 1.1 }}
               />
               <span className="bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 bg-clip-text text-transparent group-hover:opacity-80 transition-opacity">
@@ -150,7 +152,7 @@ const Index: React.FC = () => {
                     onClick={closeMobile}
                     className="block px-4 py-3 mt-2 rounded-lg bg-gradient-to-r from-indigo-500 to-purple-500 text-white text-center font-medium"
                   >
-                    📄 Resume
+                    Resume
                   </a>
                 </div>
               </motion.nav>
@@ -158,7 +160,7 @@ const Index: React.FC = () => {
           </AnimatePresence>
         </motion.header>
 
-        {/* ═══════════ MAIN CONTENT ═══════════ */}
+        {/* Main content */}
         <main className="pt-16 relative z-10">
           <section id="hero">
             <HeroSection />
@@ -176,6 +178,10 @@ const Index: React.FC = () => {
             <ProjectsSection />
           </section>
 
+          <section id="experience" className="scroll-mt-24">
+            <ExperienceSection />
+          </section>
+
           <section id="education" className="scroll-mt-24">
             <EducationTimeline />
           </section>
@@ -189,7 +195,7 @@ const Index: React.FC = () => {
           </section>
         </main>
 
-        {/* ═══════════ FOOTER ═══════════ */}
+        {/* Footer */}
         <footer className="py-10 px-4 border-t border-border/50 relative z-10">
           <div className="max-w-7xl mx-auto">
             <div className="flex flex-col md:flex-row justify-between items-center gap-6">
@@ -197,7 +203,7 @@ const Index: React.FC = () => {
                 <img
                   src={portfolioData.profile.logoAvatar}
                   alt={portfolioData.profile.name}
-                  className="w-8 h-8 rounded-full border-2 border-indigo-500 object-cover"
+                  className="h-9 w-9 rounded-full border-2 border-indigo-500 bg-white object-cover object-top"
                 />
                 <span className="font-semibold text-sm bg-gradient-to-r from-indigo-500 to-purple-500 bg-clip-text text-transparent">
                   {portfolioData.profile.brandName}
@@ -217,7 +223,7 @@ const Index: React.FC = () => {
               </nav>
 
               <p className="text-sm text-muted-foreground">
-                © {new Date().getFullYear()} {portfolioData.profile.name}
+                &copy; {new Date().getFullYear()} {portfolioData.profile.name}
               </p>
             </div>
           </div>

@@ -21,7 +21,7 @@ const ScrollToTop: React.FC = () => {
           whileHover={{ scale: 1.15 }}
           whileTap={{ scale: 0.9 }}
           onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-          className="fixed bottom-8 right-8 z-50 w-12 h-12 rounded-full
+          className="fixed bottom-24 right-4 z-40 w-12 h-12 rounded-full sm:right-6
             bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500
             text-white shadow-lg shadow-purple-500/30
             flex items-center justify-center

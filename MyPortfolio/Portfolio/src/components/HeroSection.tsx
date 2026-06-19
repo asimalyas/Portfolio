@@ -100,7 +100,7 @@ const HeroSection: React.FC = () => {
             >
               Hi, I'm{" "}
               <span className="bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 bg-clip-text text-transparent">
-                Asim Alyas
+                {portfolioData.profile.shortName}
               </span>
             </motion.h1>
 

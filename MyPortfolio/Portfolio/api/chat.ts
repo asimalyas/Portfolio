@@ -1,4 +1,6 @@
 import { portfolioData } from "../shared/portfolio.js";
+import { existsSync, readFileSync } from "node:fs";
+import { resolve } from "node:path";
 
 type VercelRequest = {
   method?: string;
@@ -37,6 +39,26 @@ const RATE_LIMIT_WINDOW_MS = 60_000;
 const RATE_LIMIT_MAX_REQUESTS = 5;
 
 const rateLimitStore = new Map<string, { count: number; resetAt: number }>();
+
+function getLocalEnvValue(key: string) {
+  if (process.env.NODE_ENV === "production") return "";
+
+  const envPath = resolve(process.cwd(), ".env.local");
+  if (!existsSync(envPath)) return "";
+
+  const line = readFileSync(envPath, "utf8")
+    .split(/\r?\n/)
+    .find((entry) => entry.trim().startsWith(`${key}=`));
+
+  if (!line) return "";
+
+  const value = line.slice(line.indexOf("=") + 1).trim();
+  return value.replace(/^["']|["']$/g, "");
+}
+
+function getGeminiApiKey() {
+  return process.env.GEMINI_API_KEY || getLocalEnvValue("GEMINI_API_KEY");
+}
 
 function getHeader(req: VercelRequest, name: string) {
   const value = req.headers?.[name] || req.headers?.[name.toLowerCase()];
@@ -112,7 +134,7 @@ function getAssistantData() {
     ...portfolioData,
     projects: portfolioData.projects.map((project) => ({
       ...project,
-      url: project.url === "#" ? "Unavailable in current portfolio data" : project.url,
+      url: project.url || "Unavailable in current portfolio data",
     })),
   };
 }
@@ -144,7 +166,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     return res.status(413).json({ error: "Request body is too large." });
   }
 
-  const apiKey = process.env.GEMINI_API_KEY;
+  const apiKey = getGeminiApiKey();
   if (!apiKey) {
     return res.status(500).json({
       error: "Gemini API key is not configured. Add GEMINI_API_KEY on the server.",
@@ -190,7 +212,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
           parts: [
             {
               text:
-                "You are a professional AI recruiter assistant for Asim Alyas Rathore's portfolio. Answer only from the supplied portfolio data. Never invent information. Keep answers concise, recruiter-friendly, and under 90 words. Prefer 3-5 short Markdown bullet points when listing skills, projects, or fit. Use brief bold labels where helpful. If information is unavailable, say so clearly in one short sentence. Do not include HTML or Markdown tables.",
+                "You are Asim Ilyas Rathore's AI recruiter assistant. Answer only from the supplied portfolio data and never invent information. Write like a concise hiring-screening assistant: direct, specific, and professional. Keep answers under 80 words. Prefer 3-4 short Markdown bullet points, with each bullet under 14 words. Use brief bold labels when helpful. If the data does not contain the answer, say that clearly in one short sentence. Do not include HTML or Markdown tables.",
             },
           ],
         },
@@ -202,7 +224,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
         ],
         generationConfig: {
           temperature: 0.2,
-          maxOutputTokens: 140,
+          maxOutputTokens: 170,
           thinkingConfig: {
             thinkingLevel: "minimal",
           },

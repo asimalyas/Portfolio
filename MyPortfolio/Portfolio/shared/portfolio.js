@@ -1,7 +1,7 @@
 ﻿export const portfolioData = {
   profile: {
-    name: "Asim Alyas Rathore",
-    shortName: "Asim Alyas",
+    name: "Asim Ilyas Rathore",
+    shortName: "Asim Ilyas Rathore",
     brandName: "Mr. Rathore",
     headline: "Software Engineering student focused on web development, machine learning, and scalable applications.",
     summary:
@@ -10,7 +10,7 @@
       "I'm a passionate Software Engineering student at COMSATS University with expertise in full-stack development, machine learning, and building scalable applications.",
     location: "Abbottabad, Pakistan",
     avatar: "/imagesAchivemnts/profilePicNew1.png",
-    logoAvatar: "/imagesAchivemnts/profilePic.jpg",
+    logoAvatar: "/imagesAchivemnts/profilePicNew1.png",
     roles: [
       "Software Engineer",
       "Web Developer",
@@ -107,15 +107,15 @@
       categories: ["Game Development"],
     },
     {
-id: 3,
-title: "Personal Developer Portfolio with AI Integration",
-description:
-"Built a responsive developer portfolio to showcase my projects, skills, achievements, and experience, with an integrated AI-powered assistant for interactive project exploration.",
-techStack: ["React", "TypeScript", "Vite", "CSS", "AI Integration", "Vercel"],
-url: "https://github.com/asimalyas/Portfolio",
-categories: ["Web Development", "Machine Learning"],
-},
- {
+      id: 21,
+      title: "Personal Developer Portfolio with AI Integration",
+      description:
+        "Built a responsive developer portfolio to showcase projects, skills, achievements, and experience, with an integrated AI-powered assistant for interactive recruiter Q&A.",
+      techStack: ["React", "TypeScript", "Vite", "CSS", "AI Integration", "Vercel"],
+      url: "https://github.com/asimalyas/Portfolio",
+      categories: ["Web Development", "Machine Learning"],
+    },
+    {
       id: 19,
       title: "MediConnect - Smart Healthcare Platform",
       description: "Enables patients to book medical assistants for home checkups. Doctors review data remotely with role-based dashboards.",
@@ -161,7 +161,7 @@ categories: ["Web Development", "Machine Learning"],
       title: "Stop Watch",
       description: "React-based stopwatch with Start, Stop, and Reset functionality. Demonstrates React hooks for state and real-time updates.",
       techStack: ["React", "JavaScript"],
-      url: "#",
+      url: null,
       categories: ["Web Development"],
     },
     {
@@ -177,7 +177,7 @@ categories: ["Web Development", "Machine Learning"],
       title: "E-Learning Course Platform",
       description: "Java-based desktop platform for online learning with authentication, course progress tracking, and MS SQL Server backend.",
       techStack: ["Java", "MS SQL Server", "JDBC"],
-      url: "#",
+      url: null,
       categories: ["Desktop Application"],
     },
     {
@@ -349,9 +349,25 @@ categories: ["Web Development", "Machine Learning"],
   ],
   experience: {
     summary:
-      "Academic and project-based software engineering experience across React, TypeScript, JavaScript, Python, Flask, machine learning, Unity, Java, SQL, and MS SQL Server.",
-    professionalRoles: [],
-    note: "No formal employment history is listed in the current portfolio data.",
+      "This section is reserved for verified internships, jobs, freelance work, and professional roles.",
+    availability: "Open to internships, junior software engineering roles, React/frontend roles, and AI/ML-focused project opportunities.",
+    placeholderTitle: "Professional experience coming soon",
+    placeholderDescription:
+      "Internships, jobs, and verified professional experience will be added here as they are completed.",
+    roles: [],
+    focusAreas: [
+      "Frontend engineering with React, TypeScript, Vite, and Tailwind CSS",
+      "Machine learning model development and Flask-based deployment",
+      "AI-assisted product features, prompt design, and secure API integration",
+      "Database-backed applications using SQL and MS SQL Server",
+    ],
+    futureEntryFields: [
+      "Role title and company name",
+      "Internship or job type, period, and location",
+      "Company logo or image if available",
+      "Responsibilities, technologies, certificate link, and company website",
+    ],
+    note: "No formal internship, job, or professional role is listed in the current portfolio data.",
   },
   links: {
     github: "https://github.com/asimalyas",
@@ -365,9 +381,10 @@ categories: ["Web Development", "Machine Learning"],
     location: "Abbottabad, Pakistan",
   },
   suggestedQuestions: [
-    "What are Asim's strongest technical skills?",
-    "Which projects best show React experience?",
+    "Why should recruiters shortlist Asim?",
+    "Which projects best prove Asim's React experience?",
     "Summarize Asim for a junior software engineer role.",
-    "What machine learning projects has Asim built?",
+    "What AI and machine learning projects has Asim built?",
+    "How can I contact Asim?",
   ],
 };

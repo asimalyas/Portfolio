@@ -11,7 +11,7 @@ type ChatMessage = {
 const MAX_QUESTION_CHARS = 300;
 
 const welcomeMessage =
-  "Hi, I'm Asim's AI recruiter assistant. Ask me about his skills, projects, education, achievements, or contact details.";
+  "Hi, I'm Asim's AI recruiter assistant. Ask about his fit, skills, projects, education, achievements, or contact details.";
 const unavailableMessage = "The AI assistant is temporarily unavailable. Please try again shortly.";
 
 function renderInlineMarkdown(text: string) {
@@ -225,6 +225,9 @@ export default function RecruiterAssistant() {
             <div className="shrink-0 border-t border-border px-4 py-3">
               {!hasUserQuestion && (
                 <div className="mb-3 grid gap-2">
+                  <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
+                    Recruiter shortcuts
+                  </p>
                   {portfolioData.suggestedQuestions.map((suggestion) => (
                     <button
                       key={suggestion}
@@ -247,7 +250,7 @@ export default function RecruiterAssistant() {
                     className="text-xs font-medium text-muted-foreground transition-colors hover:text-foreground"
                     aria-expanded={suggestionsOpen}
                   >
-                    {suggestionsOpen ? "Hide suggestions" : "Show suggestions"}
+                    {suggestionsOpen ? "Hide recruiter shortcuts" : "Show recruiter shortcuts"}
                   </button>
 
                   {suggestionsOpen && (

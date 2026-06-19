@@ -149,16 +149,22 @@ const ProjectsSection: React.FC = () => {
                         </span>
                       ))}
                     </div>
-                    <motion.a
-                      href={project.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      whileHover={{ x: 3 }}
-                      className="inline-flex items-center gap-2 text-sm font-medium text-indigo-500 dark:text-indigo-400 hover:text-indigo-600 dark:hover:text-indigo-300 transition-colors"
-                    >
-                      <span>View Project</span>
-                      <ExternalLink className="w-4 h-4" />
-                    </motion.a>
+                    {project.url ? (
+                      <motion.a
+                        href={project.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        whileHover={{ x: 3 }}
+                        className="inline-flex items-center gap-2 text-sm font-medium text-indigo-500 dark:text-indigo-400 hover:text-indigo-600 dark:hover:text-indigo-300 transition-colors"
+                      >
+                        <span>View Project</span>
+                        <ExternalLink className="w-4 h-4" />
+                      </motion.a>
+                    ) : (
+                      <span className="inline-flex items-center gap-2 text-sm font-medium text-muted-foreground">
+                        <span>Link coming soon</span>
+                      </span>
+                    )}
                   </div>
                 </GlowCard>
               </motion.div>
