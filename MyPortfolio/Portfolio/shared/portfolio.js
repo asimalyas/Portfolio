@@ -124,6 +124,15 @@ categories: ["Web Development", "Machine Learning"],
       categories: ["Web Development"],
     },
     {
+      id: 20,
+      title: "Entry Test Quiz",
+      description:
+        "AI-powered entry test practice platform where students can paste MCQs, auto-format questions, extract MCQs from PDFs/images, generate questions from lecture slides, practice with timer modes, skip/retry questions, review results, and ask an AI tutor for help.",
+      techStack: ["React", "TypeScript", "Vite", "CSS", "Gemini AI", "PDF.js", "Vercel", "LocalStorage"],
+      url: "https://quiz-test-app-five.vercel.app/",
+      categories: ["Web Development", "Machine Learning"],
+    },
+    {
       id: 5,
       title: "Attendance Management System",
       description: "Web-based system for tracking student attendance. Includes admin and student panels, authentication, and attendance reports.",
