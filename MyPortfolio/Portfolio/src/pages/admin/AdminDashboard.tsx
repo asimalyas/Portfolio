@@ -343,12 +343,12 @@ function createMetric(slug: string, title: string, total: number, publicCount: n
 
 function createFallbackMetrics(portfolioData: ReturnType<typeof usePortfolioData>["data"]): DashboardMetric[] {
   const fallbackCounts: Record<string, number> = {
-    projects: portfolioData.projects.length,
-    certificates: portfolioData.certificates.length,
-    skills: portfolioData.skills.length,
-    experience: portfolioData.experience.roles.length,
-    education: portfolioData.education.length,
-    achievements: portfolioData.achievements.length,
+    projects: portfolioData.projects?.length ?? 0,
+    certificates: portfolioData.certificates?.length ?? 0,
+    skills: portfolioData.skills?.length ?? 0,
+    experience: portfolioData.experience?.roles?.length ?? 0,
+    education: portfolioData.education?.length ?? 0,
+    achievements: portfolioData.achievements?.length ?? 0,
   };
 
   return adminCollections.map((collection) => {
