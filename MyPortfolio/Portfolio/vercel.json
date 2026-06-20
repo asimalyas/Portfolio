@@ -1,15 +1,10 @@
 ﻿{
-  "framework": "vite",
-  "devCommand": "vite --host 127.0.0.1 --port $PORT",
   "buildCommand": "npm run build",
   "outputDirectory": "dist",
+  "installCommand": "npm install",
   "rewrites": [
     {
-      "source": "/admin",
-      "destination": "/index.html"
-    },
-    {
-      "source": "/admin/(.*)",
+      "source": "/(.*)",
       "destination": "/index.html"
     }
   ]
