@@ -1,11 +1,3 @@
-# Asim Ilyas Rathore - AI Assisted Developer Portfolio
-
-[![Live Portfolio](https://img.shields.io/badge/Live_Portfolio-asimmportfolio.vercel.app-7C3AED?style=for-the-badge&logo=vercel&logoColor=white)](https://asimmportfolio.vercel.app/)
-![React](https://img.shields.io/badge/React-18-61DAFB?style=for-the-badge&logo=react&logoColor=111827)
-![TypeScript](https://img.shields.io/badge/TypeScript-5-3178C6?style=for-the-badge&logo=typescript&logoColor=white)
-![Vite](https://img.shields.io/badge/Vite-5-646CFF?style=for-the-badge&logo=vite&logoColor=white)
-![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-3-38B2AC?style=for-the-badge&logo=tailwindcss&logoColor=white)
-![Vercel](https://img.shields.io/badge/Deployed_on-Vercel-000000?style=for-the-badge&logo=vercel&logoColor=white)
 <div align="center">
 
 ```
@@ -781,6 +773,3 @@ Made with React ⚛️ + Supabase 🟢 + Gemini 🤖 + ❤️
 ```
 
 </div>
-
-- Production build: verified locally
-- Deployment: live on Vercel
