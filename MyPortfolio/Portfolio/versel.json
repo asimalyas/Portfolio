@@ -1,13 +1,12 @@
 {
-    "$schema": "https://openapi.vercel.sh/vercel.json",
+    "framework": "vite",
+    "devCommand": "vite --host 127.0.0.1 --port $PORT",
+    "buildCommand": "npm run build",
+    "outputDirectory": "dist",
     "rewrites": [
         {
-            "source": "/admin",
-            "destination": "/"
-        },
-        {
-            "source": "/admin/:path*",
-            "destination": "/"
+            "source": "/(.*)",
+            "destination": "/index.html"
         }
     ]
 }
