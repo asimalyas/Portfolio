@@ -207,7 +207,17 @@ Current `vercel.json`:
   "framework": "vite",
   "devCommand": "vite --host 127.0.0.1 --port $PORT",
   "buildCommand": "npm run build",
-  "outputDirectory": "dist"
+  "outputDirectory": "dist",
+  "rewrites": [
+    {
+      "source": "/admin",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/admin/(.*)",
+      "destination": "/index.html"
+    }
+  ]
 }
 ```
 
@@ -235,11 +245,11 @@ Deployment verification checklist:
 - `/api/chat` responds through the AI assistant.
 - `/api/extract-admin-item` works only for the signed-in admin.
 
-### Direct Route Refresh Note
+### Direct Admin Route Refresh Fix
 
-The current Vercel config is kept minimal because it works with `npx vercel dev` for this Vite setup. If production direct refreshes such as `/admin/login` or `/admin/certificates` ever return a Vercel 404, add an SPA fallback rewrite carefully and retest `/api/chat` and `/api/extract-admin-item`.
+The deployed app uses React Router for admin pages. Vercel must serve `index.html` for `/admin` and `/admin/*` routes so direct visits like `/admin/login` do not return `404: NOT_FOUND`. The rewrite is intentionally limited to admin routes so `/api/chat` and `/api/extract-admin-item` continue to resolve as serverless functions.
 
-Example fallback to test only if needed:
+Active admin route fallback:
 
 ```json
 {
@@ -249,14 +259,18 @@ Example fallback to test only if needed:
   "outputDirectory": "dist",
   "rewrites": [
     {
-      "source": "/((?!api/.*).*)",
+      "source": "/admin",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/admin/(.*)",
       "destination": "/index.html"
     }
   ]
 }
 ```
 
-Vercel supports project configuration through `vercel.json`, including build settings and rewrites. Keep API routes protected when adding any catch-all route.
+Vercel supports project configuration through `vercel.json`, including build settings and rewrites. Keep API routes out of admin rewrites so serverless endpoints stay protected.
 
 ## Email Notifications - Postponed
 
@@ -294,7 +308,7 @@ Current status:
 | Admin login fails | Confirm the Supabase user exists and the email is exactly `asimalyas4440@gmail.com`. |
 | Uploaded image not visible publicly | Confirm the image URL field is saved and Supabase Storage bucket/policies are configured. |
 | Vercel deployed API fails | Confirm server-only env vars are added in Vercel and redeploy. |
-| Direct admin URL returns 404 after deploy | Test the SPA fallback rewrite shown above, then retest API routes. |
+| Direct admin URL returns 404 after deploy | Confirm `vercel.json` includes the `/admin` and `/admin/(.*)` rewrites, then redeploy and retest API routes. |
 
 ## Security Checklist
 
