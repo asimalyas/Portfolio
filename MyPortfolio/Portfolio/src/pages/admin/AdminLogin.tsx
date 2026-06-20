@@ -43,7 +43,7 @@ const AdminLogin: React.FC = () => {
     }
 
     toast.success("Welcome back.");
-    navigate("/admin");
+    navigate("/admin", { replace: true });
   };
 
   return (

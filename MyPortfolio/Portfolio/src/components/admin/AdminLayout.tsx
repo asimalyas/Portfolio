@@ -24,12 +24,12 @@ const AdminLayout: React.FC = () => {
       return;
     }
 
-    supabase.auth.getUser().then(({ data }) => {
-      setUser(data.user);
-    });
-
+    // Use onAuthStateChange as the single source of truth.
+    // It fires INITIAL_SESSION immediately with the current session,
+    // so a separate getUser() call is unnecessary and causes a race
+    // condition that results in a blank screen after login.
     const { data: listener } = supabase.auth.onAuthStateChange((_event, session) => {
-      setUser(session?.user || null);
+      setUser(session?.user ?? null);
     });
 
     return () => listener.subscription.unsubscribe();
