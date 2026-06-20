@@ -1,4 +1,4 @@
-﻿export type AdminField = {
+export type AdminField = {
   key: string;
   label: string;
   type: "text" | "textarea" | "url" | "array" | "number" | "boolean" | "select";
@@ -42,13 +42,13 @@ export const adminCollections: AdminCollectionConfig[] = [
     description: "Manage certificates, issuers, images, and credential links.",
     listLabel: "title",
     fields: [
+      { key: "image_url", label: "Certificate Image", type: "url" },
       { key: "title", label: "Title", type: "text", required: true },
       { key: "issuer", label: "Issuer", type: "text" },
       { key: "date_label", label: "Date", type: "text", placeholder: "January 2026" },
       { key: "description", label: "Description", type: "textarea" },
-      { key: "image_url", label: "Certificate Image", type: "url" },
-      { key: "credential_url", label: "Credential URL", type: "url" },
       { key: "categories", label: "Categories", type: "array", options: ["Studies", "Projects", "Activities", "Sports", "Skills"] },
+      { key: "credential_url", label: "Credential URL (optional)", type: "url" },
       { key: "sort_order", label: "Sort Order", type: "number" },
       { key: "active", label: "Show Publicly", type: "boolean" },
     ],
@@ -75,16 +75,16 @@ export const adminCollections: AdminCollectionConfig[] = [
     description: "Manage internships, jobs, freelance roles, certificates, and company links.",
     listLabel: "title",
     fields: [
+      { key: "certificate_url", label: "Experience Certificate (optional)", type: "url" },
       { key: "title", label: "Role Title", type: "text", required: true },
       { key: "company", label: "Company", type: "text", required: true },
       { key: "type", label: "Type", type: "select", options: ["Internship", "Job", "Freelance", "Contract", "Volunteer"] },
       { key: "location", label: "Location", type: "text" },
       { key: "period", label: "Period", type: "text", placeholder: "June 2026 - August 2026" },
-      { key: "image_url", label: "Company Logo/Image", type: "url" },
       { key: "description", label: "Description", type: "textarea" },
       { key: "responsibilities", label: "Responsibilities", type: "array" },
       { key: "technologies", label: "Technologies", type: "array" },
-      { key: "certificate_url", label: "Certificate URL", type: "url" },
+      { key: "image_url", label: "Company Logo/Image", type: "url" },
       { key: "company_url", label: "Company URL", type: "url" },
       { key: "sort_order", label: "Sort Order", type: "number" },
       { key: "active", label: "Show Publicly", type: "boolean" },
@@ -113,9 +113,9 @@ export const adminCollections: AdminCollectionConfig[] = [
     description: "Manage public achievement cards and categories.",
     listLabel: "title",
     fields: [
+      { key: "image_url", label: "Image", type: "url" },
       { key: "title", label: "Title", type: "text", required: true },
       { key: "description", label: "Description", type: "textarea" },
-      { key: "image_url", label: "Image", type: "url" },
       { key: "categories", label: "Categories", type: "array", options: ["Studies", "Projects", "Activities", "Sports", "Skills"], placeholder: "Studies, Projects" },
       { key: "date_label", label: "Date", type: "text" },
       { key: "sort_order", label: "Sort Order", type: "number" },

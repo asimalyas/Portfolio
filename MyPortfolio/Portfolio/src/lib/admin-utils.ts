@@ -23,8 +23,8 @@ export function normalizeFormValue(type: string, value: string | boolean) {
 export function isValidUrl(value: string) {
   if (!value.trim()) return true;
   try {
-    new URL(value);
-    return true;
+    const url = new URL(value);
+    return ["http:", "https:", "mailto:", "tel:"].includes(url.protocol);
   } catch {
     return value.startsWith("/");
   }
