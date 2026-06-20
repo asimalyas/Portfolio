@@ -1,11 +1,12 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { GraduationCap, Calendar, Award } from "lucide-react";
-import { portfolioData } from "../../shared/portfolio.js";
-
-const educationData = portfolioData.education;
+import { usePortfolioData } from "@/hooks/usePortfolioData";
 
 const EducationTimeline: React.FC = () => {
+  const { data: portfolioData } = usePortfolioData();
+  const educationData = portfolioData.education;
+
   return (
     <section className="py-24 px-6 relative overflow-hidden bg-background">
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-gradient-to-br from-indigo-500/8 via-purple-500/5 to-transparent rounded-full blur-[100px]" />
@@ -42,12 +43,18 @@ const EducationTimeline: React.FC = () => {
               >
                 <div className="flex flex-col md:flex-row">
                   <div className="relative w-full md:w-72 h-48 md:h-auto overflow-hidden flex-shrink-0">
-                    <img
-                      src={item.image}
-                      alt={item.institution}
-                      loading="lazy"
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
-                    />
+                    {item.image ? (
+                      <img
+                        src={item.image}
+                        alt={item.institution}
+                        loading="lazy"
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                      />
+                    ) : (
+                      <div className="flex h-full w-full items-center justify-center bg-muted text-muted-foreground">
+                        <GraduationCap className="h-12 w-12" />
+                      </div>
+                    )}
                     <div className="absolute inset-0 bg-gradient-to-r from-transparent via-transparent to-card/80 hidden md:block" />
                     <div className="absolute inset-0 bg-gradient-to-t from-card/80 via-transparent to-transparent md:hidden" />
                     <div className="absolute top-3 left-3 px-3 py-1.5 rounded-lg bg-gradient-to-r from-indigo-500 to-purple-500 text-white text-xs font-bold shadow-lg flex items-center gap-1.5">

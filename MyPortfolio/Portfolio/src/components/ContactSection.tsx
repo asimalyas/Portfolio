@@ -1,15 +1,16 @@
-import React, { useState, useEffect } from "react";
+﻿import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Github, Linkedin, Mail, Phone, MapPin, Send, Loader2 } from "lucide-react";
 import { toast } from "sonner";
 import emailjs from "@emailjs/browser";
-import { portfolioData } from "../../shared/portfolio.js";
+import { usePortfolioData } from "@/hooks/usePortfolioData";
 
 const SERVICE_ID = "service_kvvu6el";
 const TEMPLATE_ID = "template_jw7yt8n";
 const PUBLIC_KEY = "lobdwVIuh3vY9JfNr";
 
 const ContactSection: React.FC = () => {
+  const { data: portfolioData } = usePortfolioData();
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -81,6 +82,9 @@ const ContactSection: React.FC = () => {
         setIsSubmitting(false);
       });
   };
+
+  const primaryPhone = portfolioData.contact.phones[0];
+  const secondaryPhones = portfolioData.contact.phones.slice(1);
 
   const socialLinks = [
     {
@@ -216,10 +220,18 @@ const ContactSection: React.FC = () => {
                   </div>
                   <div>
                     <p className="text-sm text-muted-foreground mb-0.5">Phone / WhatsApp</p>
-                    <a href={`tel:${portfolioData.contact.phones[0].replace(/\s/g, "")}`} className="text-foreground hover:text-indigo-500 transition-colors font-medium">
-                      {portfolioData.contact.phones[0]}
-                    </a>
-                    <span className="block text-sm text-muted-foreground">{portfolioData.contact.phones[1]}</span>
+                    {primaryPhone ? (
+                      <>
+                        <a href={`tel:${primaryPhone.replace(/\s/g, "")}`} className="text-foreground hover:text-indigo-500 transition-colors font-medium">
+                          {primaryPhone}
+                        </a>
+                        {secondaryPhones.map((phone) => (
+                          <span key={phone} className="block text-sm text-muted-foreground">{phone}</span>
+                        ))}
+                      </>
+                    ) : (
+                      <span className="text-sm text-muted-foreground">Not added yet</span>
+                    )}
                   </div>
                 </div>
 
@@ -275,3 +287,5 @@ const ContactSection: React.FC = () => {
 };
 
 export default ContactSection;
+
+

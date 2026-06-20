@@ -1,17 +1,18 @@
 import React from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowRight, Cpu, Code2, Brain, Database, Rocket, Sparkles } from "lucide-react";
-import { portfolioData } from "../../shared/portfolio.js";
+import { usePortfolioData } from "@/hooks/usePortfolioData";
 
-const roles = portfolioData.profile.roles;
 
 const HeroSection: React.FC = () => {
+  const { data: portfolioData } = usePortfolioData();
+  const roles = portfolioData.profile.roles;
   const [roleIndex, setRoleIndex] = React.useState(0);
 
   React.useEffect(() => {
-    const id = setInterval(() => setRoleIndex((i) => (i + 1) % roles.length), 2500);
+    const id = setInterval(() => setRoleIndex((i) => (i + 1) % Math.max(roles.length, 1)), 2500);
     return () => clearInterval(id);
-  }, []);
+  }, [roles.length]);
 
   const float = (delay = 0) => ({
     animate: {
@@ -107,14 +108,14 @@ const HeroSection: React.FC = () => {
             <div className="h-10 md:h-12 mt-3 md:mt-5 flex items-center justify-center md:justify-start">
               <AnimatePresence mode="wait">
                 <motion.span
-                  key={roles[roleIndex]}
+                  key={roles[roleIndex] || portfolioData.profile.headline}
                   className="text-lg md:text-2xl font-semibold text-muted-foreground"
                   initial={{ opacity: 0, y: 18, scale: 0.95 }}
                   animate={{ opacity: 1, y: 0, scale: 1 }}
                   exit={{ opacity: 0, y: -18, scale: 0.95 }}
                   transition={{ duration: 0.5 }}
                 >
-                  {roles[roleIndex]}
+                  {roles[roleIndex] || portfolioData.profile.headline}
                 </motion.span>
               </AnimatePresence>
             </div>

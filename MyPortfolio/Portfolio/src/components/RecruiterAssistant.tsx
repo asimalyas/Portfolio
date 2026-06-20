@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { Bot, Loader2, MessageCircle, Send, X } from "lucide-react";
-import { portfolioData } from "../../shared/portfolio.js";
+import { usePortfolioData } from "@/hooks/usePortfolioData";
 
 type ChatMessage = {
   role: "assistant" | "user";
@@ -73,6 +73,7 @@ function AssistantMarkdown({ text }: { text: string }) {
 }
 
 export default function RecruiterAssistant() {
+  const { data: portfolioData } = usePortfolioData();
   const [open, setOpen] = useState(false);
   const [question, setQuestion] = useState("");
   const [messages, setMessages] = useState<ChatMessage[]>([

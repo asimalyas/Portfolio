@@ -1,9 +1,9 @@
 import { motion } from "framer-motion";
 import { Card, CardContent } from "@/components/ui/card";
 import { Code, Database, Brain, Rocket, Gamepad, Monitor } from "lucide-react";
-import { portfolioData, type SkillIcon } from "../../shared/portfolio.js";
+import type { SkillIcon } from "../../shared/portfolio.js";
+import { usePortfolioData } from "@/hooks/usePortfolioData";
 
-const skills = portfolioData.skills;
 const skillIcons: Record<SkillIcon, JSX.Element> = {
   monitor: <Monitor className="w-9 h-9" />,
   gamepad: <Gamepad className="w-9 h-9" />,
@@ -26,13 +26,14 @@ const cardVariants = {
 };
 
 export default function AboutSection() {
+  const { data: portfolioData } = usePortfolioData();
+  const skills = portfolioData.skills;
+
   return (
     <section className="w-full py-24 bg-background relative overflow-hidden">
-      {/* Subtle glow */}
       <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_center,hsl(var(--primary)/0.06),transparent_60%)]" />
 
       <div className="max-w-6xl mx-auto px-6">
-        {/* Heading */}
         <motion.div
           initial={{ opacity: 0, y: -30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -48,7 +49,6 @@ export default function AboutSection() {
           </p>
         </motion.div>
 
-        {/* Skills Grid */}
         <motion.div
           className="grid gap-6 md:grid-cols-2 lg:grid-cols-3"
           variants={containerVariants}
@@ -57,14 +57,13 @@ export default function AboutSection() {
           viewport={{ once: true, amount: 0.1 }}
         >
           {skills.map((skill, index) => (
-            <motion.div key={index} variants={cardVariants}>
+            <motion.div key={skill.title || index} variants={cardVariants}>
               <Card className="group relative bg-card border border-border rounded-2xl shadow-sm overflow-hidden hover:shadow-lg hover:shadow-primary/5 transition-all duration-500 h-full">
-                {/* Glow border on hover */}
                 <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-r from-indigo-500/10 via-purple-500/10 to-pink-500/10 blur-xl" />
 
                 <CardContent className="relative p-6 flex flex-col items-center text-center z-10">
                   <div className={`mb-4 ${skill.color} transform group-hover:scale-110 transition-transform duration-300`}>
-                    {skillIcons[skill.icon]}
+                    {skillIcons[skill.icon] || skillIcons.code}
                   </div>
                   <h3 className="text-lg font-semibold mb-2 text-foreground">{skill.title}</h3>
                   <p className="text-muted-foreground text-sm leading-relaxed">{skill.description}</p>

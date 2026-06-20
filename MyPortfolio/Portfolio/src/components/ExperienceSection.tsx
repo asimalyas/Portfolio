@@ -1,10 +1,8 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { Award, BriefcaseBusiness, Building2, CheckCircle2, ExternalLink, Target } from "lucide-react";
-import { portfolioData } from "../../shared/portfolio.js";
+import { usePortfolioData } from "@/hooks/usePortfolioData";
 
-const experience = portfolioData.experience;
-const roles = experience.roles;
 
 const cardVariants = {
   hidden: { opacity: 0, y: 28 },
@@ -12,6 +10,10 @@ const cardVariants = {
 };
 
 const ExperienceSection: React.FC = () => {
+  const { data: portfolioData } = usePortfolioData();
+  const experience = portfolioData.experience;
+  const roles = experience.roles;
+
   return (
     <section className="py-24 px-6 relative overflow-hidden bg-background">
       <div className="absolute top-12 right-0 h-80 w-80 rounded-full bg-indigo-500/10 blur-[100px]" />

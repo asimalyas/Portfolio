@@ -1,36 +1,32 @@
-import React, { useState } from "react";
+﻿import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Search, ExternalLink } from "lucide-react";
 import GlowCard from "./GlowCard";
-import { portfolioData, type ProjectCategory } from "../../shared/portfolio.js";
+import type { ProjectCategory } from "../../shared/portfolio.js";
+import { usePortfolioData } from "@/hooks/usePortfolioData";
 
 type FilterCategory = "All" | ProjectCategory;
 
-const allProjects = portfolioData.projects;
-const categories = portfolioData.projectCategories as readonly FilterCategory[];
-
 const ProjectsSection: React.FC = () => {
+  const { data: portfolioData } = usePortfolioData();
+  const allProjects = portfolioData.projects;
+  const categories = portfolioData.projectCategories as readonly FilterCategory[];
   const [activeCategory, setActiveCategory] = useState<FilterCategory>("All");
   const [searchQuery, setSearchQuery] = useState("");
   const [visibleCount, setVisibleCount] = useState(6);
 
   const filteredProjects = allProjects.filter((project) => {
-    const matchesCategory =
-      activeCategory === "All" || project.categories.includes(activeCategory);
-    const matchesSearch = project.title
-      .toLowerCase()
-      .includes(searchQuery.toLowerCase());
+    const matchesCategory = activeCategory === "All" || project.categories.includes(activeCategory);
+    const matchesSearch = project.title.toLowerCase().includes(searchQuery.toLowerCase());
     return matchesCategory && matchesSearch;
   });
 
-  const categoryCounts: Record<FilterCategory, number> = {
-    All: allProjects.length,
-    "Web Development": allProjects.filter((p) => p.categories.includes("Web Development")).length,
-    "Machine Learning": allProjects.filter((p) => p.categories.includes("Machine Learning")).length,
-    "Game Development": allProjects.filter((p) => p.categories.includes("Game Development")).length,
-    "Data Structures": allProjects.filter((p) => p.categories.includes("Data Structures")).length,
-    "Desktop Application": allProjects.filter((p) => p.categories.includes("Desktop Application")).length,
-  };
+  const categoryCounts = Object.fromEntries(
+    categories.map((cat) => [
+      cat,
+      cat === "All" ? allProjects.length : allProjects.filter((p) => p.categories.includes(cat)).length,
+    ]),
+  ) as Record<FilterCategory, number>;
 
   const container = {
     hidden: {},
@@ -100,9 +96,7 @@ const ProjectsSection: React.FC = () => {
               <span>{cat}</span>
               <span
                 className={`text-xs px-2 py-0.5 rounded-full ${
-                  activeCategory === cat
-                    ? "bg-white/20 text-white"
-                    : "bg-background text-muted-foreground"
+                  activeCategory === cat ? "bg-white/20 text-white" : "bg-background text-muted-foreground"
                 }`}
               >
                 {categoryCounts[cat] || 0}
@@ -132,10 +126,21 @@ const ProjectsSection: React.FC = () => {
                   hoverScale={1.02}
                   className="relative h-full rounded-2xl overflow-hidden border border-border bg-card"
                 >
-                  <div className="p-6 flex flex-col h-full relative z-10">
-                    <h3 className="text-lg font-semibold mb-2 text-foreground group-hover:text-indigo-500 dark:group-hover:text-indigo-400 transition-colors leading-snug">
-                      {project.title}
-                    </h3>
+                  <div className="flex h-full flex-col relative z-10">
+                    {project.image && (
+                      <div className="aspect-video overflow-hidden border-b border-border bg-muted">
+                        <img
+                          src={project.image}
+                          alt={`${project.title} preview`}
+                          className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                          loading="lazy"
+                        />
+                      </div>
+                    )}
+                    <div className="flex flex-1 flex-col p-6">
+                      <h3 className="text-lg font-semibold mb-2 text-foreground group-hover:text-indigo-500 dark:group-hover:text-indigo-400 transition-colors leading-snug">
+                        {project.title}
+                      </h3>
                     <p className="text-sm text-muted-foreground mb-4 leading-relaxed flex-grow">
                       {project.description}
                     </p>
@@ -165,6 +170,7 @@ const ProjectsSection: React.FC = () => {
                         <span>Link coming soon</span>
                       </span>
                     )}
+                    </div>
                   </div>
                 </GlowCard>
               </motion.div>

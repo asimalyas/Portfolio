@@ -1,4 +1,4 @@
-export type SkillIcon = "monitor" | "gamepad" | "brain" | "database" | "code" | "rocket";
+﻿export type SkillIcon = "monitor" | "gamepad" | "brain" | "database" | "code" | "rocket";
 export type ProjectCategory =
   | "Web Development"
   | "Machine Learning"
@@ -28,15 +28,16 @@ export type PortfolioData = {
   }>;
   projectCategories: Array<"All" | ProjectCategory>;
   projects: Array<{
-    id: number;
+    id: number | string;
     title: string;
     description: string;
     techStack: string[];
     url: string | null;
+    image?: string;
     categories: ProjectCategory[];
   }>;
   education: Array<{
-    id: number;
+    id: number | string;
     years: string;
     degree: string;
     institution: string;
@@ -45,11 +46,21 @@ export type PortfolioData = {
   }>;
   achievementCategories: Array<"All" | AchievementCategory>;
   achievements: Array<{
-    id: number;
+    id: number | string;
     title: string;
     description: string;
     image: string;
     category: AchievementCategory[];
+  }>;
+  certificates?: Array<{
+    id: number | string;
+    title: string;
+    issuer: string;
+    dateLabel: string;
+    description: string;
+    image: string;
+    credentialUrl: string | null;
+    categories: AchievementCategory[];
   }>;
   experience: {
     summary: string;
@@ -87,3 +98,7 @@ export type PortfolioData = {
 };
 
 export const portfolioData: PortfolioData;
+
+
+
+

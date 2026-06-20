@@ -1,15 +1,16 @@
-import { useState } from "react";
+﻿import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Card, CardContent } from "@/components/ui/card";
-import { X } from "lucide-react";
-import { portfolioData, type AchievementCategory } from "../../shared/portfolio.js";
+import { Award, X } from "lucide-react";
+import type { AchievementCategory } from "../../shared/portfolio.js";
+import { usePortfolioData } from "@/hooks/usePortfolioData";
 
 type FilterCat = "All" | AchievementCategory;
 
-const achievements = portfolioData.achievements;
-const categories = portfolioData.achievementCategories as readonly FilterCat[];
-
 export default function AchievementsSection() {
+  const { data: portfolioData } = usePortfolioData();
+  const achievements = portfolioData.achievements;
+  const categories = portfolioData.achievementCategories as readonly FilterCat[];
   const [filter, setFilter] = useState<FilterCat>("All");
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
   const [visibleCount, setVisibleCount] = useState(6);
@@ -28,7 +29,7 @@ export default function AchievementsSection() {
       <div className="max-w-6xl mx-auto px-6 relative z-10">
         <motion.div initial={{ opacity: 0, y: -30 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }} viewport={{ once: true }} className="text-center mb-14">
           <h2 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 text-transparent bg-clip-text">My Achievements</h2>
-          <p className="text-muted-foreground text-lg max-w-xl mx-auto">Certificates, honors, and milestones from my academic journey.</p>
+          <p className="text-muted-foreground text-lg max-w-xl mx-auto">Honors, awards, activities, and milestones from my academic journey.</p>
         </motion.div>
 
         <div className="flex justify-center gap-3 mb-12 flex-wrap">
@@ -43,10 +44,16 @@ export default function AchievementsSection() {
 
         <motion.div layout className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {visible.map((ach, i) => (
-            <motion.div key={ach.id} initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: i * 0.08 }} viewport={{ once: true }} whileHover={{ y: -4 }} className="group cursor-pointer" onClick={() => setSelectedImage(ach.image)}>
+            <motion.div key={ach.id} initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: i * 0.08 }} viewport={{ once: true }} whileHover={{ y: -4 }} className="group cursor-pointer" onClick={() => ach.image && setSelectedImage(ach.image)}>
               <Card className="overflow-hidden rounded-2xl bg-card border border-border hover:border-primary/30 hover:shadow-lg transition-all duration-500 h-full">
                 <div className="relative w-full h-52 overflow-hidden">
-                  <img src={ach.image} alt={ach.title} loading="lazy" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
+                  {ach.image ? (
+                    <img src={ach.image} alt={ach.title} loading="lazy" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
+                  ) : (
+                    <div className="flex h-full w-full items-center justify-center bg-muted text-muted-foreground">
+                      <Award className="h-12 w-12" />
+                    </div>
+                  )}
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent opacity-60 group-hover:opacity-40 transition-opacity" />
                 </div>
                 <CardContent className="p-5">

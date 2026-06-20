@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+﻿import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
 import HeroSection from '@/components/HeroSection';
@@ -8,12 +8,13 @@ import EducationTimeline from '@/components/EducationTimeline';
 import ContactSection from '@/components/ContactSection';
 import AboutSection from '@/components/AboutSection';
 import Achievements from '@/components/Achievements';
+import CertificatesSection from '@/components/CertificatesSection';
 import ExperienceSection from '@/components/ExperienceSection';
 import ThemeToggle from '@/components/ThemeToggle';
 import ScrollToTop from '@/components/ScrollToTop';
 import ParticleBackground from '@/components/ParticleBackground';
-import { portfolioData } from '../../shared/portfolio.js';
 import RecruiterAssistant from '@/components/RecruiterAssistant';
+import { usePortfolioData } from '@/hooks/usePortfolioData';
 
 const navLinks = [
   { name: 'About', href: '#aboutus' },
@@ -21,11 +22,13 @@ const navLinks = [
   { name: 'Experience', href: '#experience' },
   { name: 'Education', href: '#education' },
   { name: 'Achievements', href: '#achievements' },
+  { name: 'Certificates', href: '#certificates' },
   { name: 'Contact', href: '#contact' },
 ];
 
 const Index: React.FC = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
+  const { data: portfolioData } = usePortfolioData();
 
   const closeMobile = () => setMobileOpen(false);
 
@@ -190,6 +193,10 @@ const Index: React.FC = () => {
             <Achievements />
           </section>
 
+          <section id="certificates" className="scroll-mt-24">
+            <CertificatesSection />
+          </section>
+
           <section id="contact" className="scroll-mt-24">
             <ContactSection />
           </section>
@@ -222,9 +229,14 @@ const Index: React.FC = () => {
                 ))}
               </nav>
 
-              <p className="text-sm text-muted-foreground">
-                &copy; {new Date().getFullYear()} {portfolioData.profile.name}
-              </p>
+              <div className="flex items-center gap-3">
+                <a href="/admin/login" className="text-xs text-muted-foreground transition-colors hover:text-foreground">
+                  Admin Login
+                </a>
+                <p className="text-sm text-muted-foreground">
+                  &copy; {new Date().getFullYear()} {portfolioData.profile.name}
+                </p>
+              </div>
             </div>
           </div>
         </footer>
@@ -238,3 +250,4 @@ const Index: React.FC = () => {
 };
 
 export default Index;
+

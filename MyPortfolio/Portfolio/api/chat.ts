@@ -1,6 +1,8 @@
-import { portfolioData } from "../shared/portfolio.js";
+﻿import { portfolioData } from "../shared/portfolio.js";
 import { existsSync, readFileSync } from "node:fs";
 import { resolve } from "node:path";
+
+type PortfolioData = typeof portfolioData;
 
 type VercelRequest = {
   method?: string;
@@ -37,6 +39,14 @@ const MAX_ANSWER_WORDS = 90;
 const MAX_BODY_BYTES = 2_048;
 const RATE_LIMIT_WINDOW_MS = 60_000;
 const RATE_LIMIT_MAX_REQUESTS = 5;
+const SUPABASE_TABLES = [
+  "skills",
+  "projects",
+  "education",
+  "experiences",
+  "achievements",
+  "certificates",
+] as const;
 
 const rateLimitStore = new Map<string, { count: number; resetAt: number }>();
 
@@ -58,6 +68,19 @@ function getLocalEnvValue(key: string) {
 
 function getGeminiApiKey() {
   return process.env.GEMINI_API_KEY || getLocalEnvValue("GEMINI_API_KEY");
+}
+
+function getSupabaseConfig() {
+  const url =
+    process.env.SUPABASE_URL ||
+    process.env.VITE_SUPABASE_URL ||
+    getLocalEnvValue("VITE_SUPABASE_URL");
+  const anonKey =
+    process.env.SUPABASE_ANON_KEY ||
+    process.env.VITE_SUPABASE_ANON_KEY ||
+    getLocalEnvValue("VITE_SUPABASE_ANON_KEY");
+
+  return { url, anonKey };
 }
 
 function getHeader(req: VercelRequest, name: string) {
@@ -129,7 +152,7 @@ function trimWords(text: string, maxWords: number) {
   return `${words.slice(0, maxWords).join(" ")}...`;
 }
 
-function getAssistantData() {
+function getFallbackAssistantData(): PortfolioData {
   return {
     ...portfolioData,
     projects: portfolioData.projects.map((project) => ({
@@ -139,10 +162,154 @@ function getAssistantData() {
   };
 }
 
-function buildPrompt(question: string) {
+async function fetchSupabaseRows<T>(url: string, anonKey: string, table: string, query = "select=*") {
+  const response = await fetch(`${url.replace(/\/$/, "")}/rest/v1/${table}?${query}`, {
+    headers: {
+      apikey: anonKey,
+      Authorization: `Bearer ${anonKey}`,
+    },
+  });
+
+  if (!response.ok) throw new Error(`Supabase ${table} request failed`);
+  return (await response.json()) as T[];
+}
+
+async function getAssistantData(): Promise<PortfolioData> {
+  const { url, anonKey } = getSupabaseConfig();
+  const fallbackData = getFallbackAssistantData();
+
+  if (!url || !anonKey) return fallbackData;
+
+  try {
+    const [profileRows, ...collectionRows] = await Promise.all([
+      fetchSupabaseRows<Record<string, unknown>>(url, anonKey, "profile", "id=eq.main&select=*"),
+      ...SUPABASE_TABLES.map((table) =>
+        fetchSupabaseRows<Record<string, unknown>>(url, anonKey, table, "active=eq.true&select=*&order=sort_order.asc")
+      ),
+    ]);
+
+    const profile = profileRows[0];
+    const [skills, projects, education, experiences, achievements, certificates] = collectionRows;
+
+    return {
+      ...fallbackData,
+      profile: profile
+        ? {
+            name: String(profile.name || fallbackData.profile.name),
+            shortName: String(profile.short_name || fallbackData.profile.shortName),
+            brandName: String(profile.brand_name || fallbackData.profile.brandName),
+            headline: String(profile.headline || fallbackData.profile.headline),
+            summary: String(profile.summary || fallbackData.profile.summary),
+            about: String(profile.about || fallbackData.profile.about),
+            location: String(profile.location || fallbackData.profile.location),
+            avatar: String(profile.avatar_url || fallbackData.profile.avatar),
+            logoAvatar: String(profile.logo_avatar_url || fallbackData.profile.logoAvatar),
+            roles: Array.isArray(profile.roles) ? (profile.roles as string[]) : fallbackData.profile.roles,
+          }
+        : fallbackData.profile,
+      links: profile
+        ? {
+            github: String(profile.github_url || fallbackData.links.github),
+            linkedin: String(profile.linkedin_url || fallbackData.links.linkedin),
+            resume: String(profile.resume_url || fallbackData.links.resume),
+          }
+        : fallbackData.links,
+      contact: profile
+        ? {
+            email: String(profile.contact_email || fallbackData.contact.email),
+            phones: Array.isArray(profile.phones) ? (profile.phones as string[]) : fallbackData.contact.phones,
+            location: String(profile.location || fallbackData.contact.location),
+          }
+        : fallbackData.contact,
+      suggestedQuestions:
+        profile && Array.isArray(profile.suggested_questions)
+          ? (profile.suggested_questions as string[])
+          : fallbackData.suggestedQuestions,
+      skills: skills.length
+        ? skills.map((skill) => ({
+            icon: String(skill.icon || "code") as PortfolioData["skills"][number]["icon"],
+            color: String(skill.color || "from-indigo-500 to-purple-500"),
+            title: String(skill.title || ""),
+            description: String(skill.description || ""),
+          }))
+        : fallbackData.skills,
+      projects: projects.length
+        ? projects.map((project) => ({
+            id: String(project.id || project.title || "project"),
+            title: String(project.title || ""),
+            description: String(project.description || ""),
+            techStack: Array.isArray(project.tech_stack) ? (project.tech_stack as string[]) : [],
+            url: project.url ? String(project.url) : "Unavailable in current portfolio data",
+            categories: Array.isArray(project.categories)
+              ? (project.categories as PortfolioData["projects"][number]["categories"])
+              : [],
+          }))
+        : fallbackData.projects,
+      education: education.length
+        ? education.map((item) => ({
+            id: String(item.id || item.degree || "education"),
+            years: String(item.years || ""),
+            degree: String(item.degree || ""),
+            institution: String(item.institution || ""),
+            grade: String(item.grade || ""),
+            image: String(item.image_url || ""),
+          }))
+        : fallbackData.education,
+      achievements: achievements.length
+        ? achievements.map((achievement) => ({
+            id: String(achievement.id || achievement.title || "achievement"),
+            title: String(achievement.title || ""),
+            description: String(achievement.description || ""),
+            image: String(achievement.image_url || ""),
+            category: Array.isArray(achievement.categories)
+              ? (achievement.categories as PortfolioData["achievements"][number]["category"])
+              : [],
+          }))
+        : fallbackData.achievements,
+      certificates: certificates.length
+        ? certificates.map((certificate) => ({
+            id: String(certificate.id || certificate.title || "certificate"),
+            title: String(certificate.title || ""),
+            issuer: String(certificate.issuer || ""),
+            dateLabel: String(certificate.date_label || ""),
+            description: String(certificate.description || ""),
+            image: String(certificate.image_url || ""),
+            credentialUrl: certificate.credential_url ? String(certificate.credential_url) : null,
+            categories: Array.isArray(certificate.categories)
+              ? (certificate.categories as NonNullable<PortfolioData["certificates"]>[number]["categories"])
+              : certificate.category
+                ? [String(certificate.category) as NonNullable<PortfolioData["certificates"]>[number]["categories"][number]]
+                : ["Skills"],
+          }))
+        : fallbackData.certificates,
+      experience: {
+        ...fallbackData.experience,
+        roles: experiences.length
+          ? experiences.map((role) => ({
+              title: String(role.title || ""),
+              company: String(role.company || ""),
+              type: String(role.type || "Internship") as PortfolioData["experience"]["roles"][number]["type"],
+              location: String(role.location || ""),
+              period: String(role.period || ""),
+              image: role.image_url ? String(role.image_url) : undefined,
+              description: String(role.description || ""),
+              responsibilities: Array.isArray(role.responsibilities) ? (role.responsibilities as string[]) : [],
+              technologies: Array.isArray(role.technologies) ? (role.technologies as string[]) : [],
+              certificateUrl: role.certificate_url ? String(role.certificate_url) : undefined,
+              companyUrl: role.company_url ? String(role.company_url) : undefined,
+            }))
+          : fallbackData.experience.roles,
+      },
+    };
+  } catch {
+    return fallbackData;
+  }
+}
+
+async function buildPrompt(question: string) {
   return [
     "Portfolio data:",
-    JSON.stringify(getAssistantData()),
+    JSON.stringify(await getAssistantData()),
     "",
     "Recruiter question:",
     question,
@@ -219,7 +386,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
         contents: [
           {
             role: "user",
-            parts: [{ text: buildPrompt(normalizedQuestion) }],
+            parts: [{ text: await buildPrompt(normalizedQuestion) }],
           },
         ],
         generationConfig: {
@@ -264,3 +431,4 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     });
   }
 }
+
