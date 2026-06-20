@@ -43,6 +43,24 @@ const AdminLogin: React.FC = () => {
     }
 
     toast.success("Welcome back.");
+
+    // Wait for the Supabase client's internal auth state to fully settle
+    // before navigating, so AdminLayout's getSession() call will
+    // immediately return the authenticated session.
+    await new Promise<void>((resolve) => {
+      const { data: sub } = supabase.auth.onAuthStateChange((event) => {
+        if (event === "SIGNED_IN" || event === "INITIAL_SESSION") {
+          sub.subscription.unsubscribe();
+          resolve();
+        }
+      });
+      // Safety timeout — resolve even if the event somehow doesn't fire
+      setTimeout(() => {
+        sub.subscription.unsubscribe();
+        resolve();
+      }, 500);
+    });
+
     navigate("/admin", { replace: true });
   };
 
