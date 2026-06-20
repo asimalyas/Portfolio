@@ -1,7 +1,8 @@
 ﻿{
+  "framework": "vite",
+  "devCommand": "vite --host 127.0.0.1 --port $PORT",
   "buildCommand": "npm run build",
   "outputDirectory": "dist",
-  "installCommand": "npm install",
   "rewrites": [
     {
       "source": "/(.*)",
