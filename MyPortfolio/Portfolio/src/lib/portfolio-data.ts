@@ -1,4 +1,4 @@
-﻿import { portfolioData as fallbackPortfolioData } from "../../shared/portfolio.js";
+import { portfolioData as fallbackPortfolioData } from "../../shared/portfolio.js";
 import type { AchievementCategory, PortfolioData, ProjectCategory, SkillIcon } from "../../shared/portfolio.js";
 import { supabase } from "./supabase";
 
@@ -72,6 +72,7 @@ type AchievementRow = {
   title: string;
   description: string;
   image_url: string | null;
+  credential_url: string | null;
   categories: string[] | null;
   sort_order: number;
 };
@@ -218,6 +219,7 @@ export async function fetchPortfolioData(): Promise<PortfolioData> {
           title: achievement.title,
           description: achievement.description,
           image: achievement.image_url || "",
+          credentialUrl: achievement.credential_url,
           category: asAchievementCategories(achievement.categories),
         }))
       : fallbackPortfolioData.achievements,

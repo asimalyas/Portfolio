@@ -1,4 +1,4 @@
-﻿-- Portfolio Admin Dashboard schema for Supabase
+-- Portfolio Admin Dashboard schema for Supabase
 -- Run this file in the Supabase SQL editor after creating your project.
 
 create extension if not exists "pgcrypto";
@@ -112,6 +112,7 @@ create table if not exists public.achievements (
   title text not null,
   description text not null default '',
   image_url text,
+  credential_url text,
   categories text[] not null default '{}',
   date_label text not null default '',
   sort_order integer not null default 0,

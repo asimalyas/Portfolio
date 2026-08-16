@@ -1,4 +1,4 @@
-﻿export type SkillIcon = "monitor" | "gamepad" | "brain" | "database" | "code" | "rocket";
+export type SkillIcon = "monitor" | "gamepad" | "brain" | "database" | "code" | "rocket";
 export type ProjectCategory =
   | "Web Development"
   | "Machine Learning"
@@ -50,6 +50,7 @@ export type PortfolioData = {
     title: string;
     description: string;
     image: string;
+    credentialUrl?: string | null;
     category: AchievementCategory[];
   }>;
   certificates?: Array<{

@@ -1,4 +1,4 @@
-﻿import { portfolioData } from "../shared/portfolio.js";
+import { portfolioData } from "../shared/portfolio.js";
 import { existsSync, readFileSync } from "node:fs";
 import { resolve } from "node:path";
 
@@ -261,6 +261,7 @@ async function getAssistantData(): Promise<PortfolioData> {
             title: String(achievement.title || ""),
             description: String(achievement.description || ""),
             image: String(achievement.image_url || ""),
+            credentialUrl: achievement.credential_url ? String(achievement.credential_url) : null,
             category: Array.isArray(achievement.categories)
               ? (achievement.categories as PortfolioData["achievements"][number]["category"])
               : [],

@@ -46,7 +46,7 @@ const MAX_FILE_BYTES = 8 * 1024 * 1024;
 
 const allowedFields: Record<Collection, string[]> = {
   certificates: ["title", "issuer", "date_label", "description", "credential_url", "categories"],
-  achievements: ["title", "description", "date_label", "categories"],
+  achievements: ["title", "description", "date_label", "credential_url", "categories"],
   experience: [
     "title",
     "company",

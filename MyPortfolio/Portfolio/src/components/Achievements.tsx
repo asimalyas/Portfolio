@@ -1,7 +1,7 @@
-﻿import { useState } from "react";
+import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Card, CardContent } from "@/components/ui/card";
-import { Award, X } from "lucide-react";
+import { Award, ExternalLink, X } from "lucide-react";
 import type { AchievementCategory } from "../../shared/portfolio.js";
 import { usePortfolioData } from "@/hooks/usePortfolioData";
 
@@ -59,8 +59,20 @@ export default function AchievementsSection() {
                 <CardContent className="p-5">
                   <h3 className="text-lg font-semibold mb-2 text-foreground group-hover:text-indigo-500 dark:group-hover:text-indigo-400 transition-colors leading-snug">{ach.title}</h3>
                   <p className="text-muted-foreground text-sm leading-relaxed mb-3">{ach.description}</p>
-                  <div className="flex flex-wrap gap-1.5">
+                  <div className="flex flex-wrap items-center gap-1.5">
                     {ach.category.map((c) => (<span key={c} className="text-xs px-2 py-0.5 rounded-md bg-muted text-muted-foreground border border-border">{c}</span>))}
+                    {ach.credentialUrl && (
+                      <a
+                        href={ach.credentialUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-1 text-xs font-medium text-indigo-500 hover:text-indigo-600 dark:text-indigo-400 dark:hover:text-indigo-300"
+                        onClick={(e) => e.stopPropagation()}
+                      >
+                        View Credential
+                        <ExternalLink className="h-3.5 w-3.5" />
+                      </a>
+                    )}
                   </div>
                 </CardContent>
               </Card>

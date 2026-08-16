@@ -118,6 +118,7 @@ export const adminCollections: AdminCollectionConfig[] = [
       { key: "description", label: "Description", type: "textarea" },
       { key: "categories", label: "Categories", type: "array", options: ["Studies", "Projects", "Activities", "Sports", "Skills"], placeholder: "Studies, Projects" },
       { key: "date_label", label: "Date", type: "text" },
+      { key: "credential_url", label: "Credential URL (optional)", type: "url" },
       { key: "sort_order", label: "Sort Order", type: "number" },
       { key: "active", label: "Show Publicly", type: "boolean" },
     ],
